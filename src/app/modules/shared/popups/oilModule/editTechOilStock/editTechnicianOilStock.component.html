@@ -1,0 +1,80 @@
+<div class="row" *ngIf="!isEdit">
+  <div class="col-md-12">
+    <div class="">
+      <div class="card-body">
+        <h3 class="card-title">Technician Oil Stock Detail</h3>
+        <div class="table-responsive">
+          <table class="mb-0 table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Oil Name</th>
+                <th>Stock Id</th>
+                <th>Total Assign</th>
+                <th>Total Sale</th>
+                <th>Available</th>
+                <th>Assign Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let stock of techStock ; let i=index">
+                <td scope="row">{{i+1}}</td>
+                <td>{{oil.title}}</td>
+                <td>{{stock.stockId}}</td>
+                <td>{{stock.totalAssign}} </td>
+                <td>{{stock.totalSale}}</td>
+                <td>{{stock.totalAssign - stock.totalSale}} </td>
+                <td>{{stock.created_at | date}}</td>
+                <td> <button type="button" title="Edit" (click)="editTechnicianStock(stock)"
+                    class="btn btn-circle btn-default btn-sm"><span class="sr-only">Detail</span><i
+                      class="fa fa-edit"></i></button>
+                </td>
+
+              </tr>
+
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="row" *ngIf="isEdit" style="min-width: 400px;">
+  <div class="col-md-12">
+    <h3 class="card-title">Please enter quantity to deduct from technician stock</h3>
+    <small>You can only decrease {{min}} to {{max}} number of oils</small>
+    <form class="" name="loginForm" (ngSubmit)="f.form.valid && editStockDetail()" #f="ngForm" novalidate>
+
+      <div class="row">
+        <div class="col-md-12">
+
+
+          <div class="position-relative form-group">
+            <input type="number" [min]="min" [max]="max" name="quantity" class="form-control"
+              placeholder="Enter  quantity" [(ngModel)]="quantity" #quant="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && quant.invalid }" required>
+
+            <div *ngIf="f.submitted && quant.invalid" class="invalid-feedback">
+              <div *ngIf="quant.errors.required">Please enter quantity</div>
+
+            </div>
+            <small>You can only decrease {{min}} to {{max}} number of oils</small>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="text-right">
+        <button type="button" class="btn btn-secondary mx-1" (click)="this.isEdit = false">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="disabled">Decrease Stock</button>
+      </div>
+    </form>
+  </div>
+</div>

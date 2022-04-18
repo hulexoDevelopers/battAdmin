@@ -1,0 +1,77 @@
+// button {
+//     background: #fff;
+//     color: #222;
+//     border: 1px solid #e7e7e7;
+//     border-bottom: 2px solid #ddd;
+//     border-radius: 2px;
+//     padding: 4px 17px;
+// }
+// button.active {
+//     color: #fff;
+//     background: #008ffb;
+//     border: 1px solid blue;
+//     border-bottom: 2px solid blue;
+// }
+// button:focus {
+//     outline: 0;
+// }
+.btn {
+    font-size: 1rem;
+    padding: 0.575rem 0.75rem;
+}
+
+.summary-cards .card {
+    margin-bottom: 10px;
+}
+
+[type="date"] {
+    background: #fff url(../../../../assets/images/calendar_2.webp) 3% 50% no-repeat;
+}
+
+[type="date"]::-webkit-inner-spin-button {
+    display: none;
+}
+
+[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}
+
+label {
+    display: block;
+}
+
+input {
+    border: 1px solid #c4c4c4;
+    border-radius: 4px;
+    background-color: #fff;
+    padding: 6px 5px 6px 30px;
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+    min-width: 240px;
+    text-transform: uppercase;
+}
+
+.form-control {
+    height: calc(2.75rem + 2px);
+}
+
+.input-container input {
+    border: none;
+    box-sizing: border-box;
+    outline: 0;
+    padding: .75rem;
+    position: relative;
+    width: 100%;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}

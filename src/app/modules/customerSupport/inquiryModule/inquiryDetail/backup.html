@@ -1,0 +1,521 @@
+// import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+// import { Router, ActivatedRoute, Params } from '@angular/router';
+// import { alert } from './../../../shared/services/sweetAlert.service';
+// import { Data } from 'src/app/modules/shared/services/shareDataService';
+// import { MatDialog } from '@angular/material/dialog';
+// import { resourceService } from './../../../shared/services/reource.service';
+// import { userService } from '../../../shared/services/user.service';
+// import { UserInfoService } from './../../../shared/auth/userInfoService';
+// import { inquiryService } from './../../../shared/services/enquiry.service';
+// import { batteryService } from './../../../shared/services/battery.service';
+// import { batteryStockService } from './../../../shared/services/batteryStock.service';
+// import { jobService } from './../../../shared/services/job.service';
+// import { vehicleService } from './../../../adminModule/manageVehicles/services/vehicleService';
+// import { SocService } from './../../../shared/services/soc.service';
+
+// @Component({
+//   templateUrl: './inquiryDetail.component.html',
+//   styleUrls: ['./inquiryDetail.component.scss'],
+// })
+// export class inquiryDetailComponent implements OnInit {
+//   @ViewChild('myInput')
+//   myInputVariable: ElementRef;
+//   isDisabled: boolean = false;
+//   allInquiries;
+//   itemPerPage = 100;
+//   page = 1;
+//   allUsers;
+//   inqId;
+//   inqData;
+//   technicianList;
+
+//   allVehicles;
+//   constructor(
+//     private route: ActivatedRoute,
+//     private router: Router,
+//     private inquiryService: inquiryService,
+//     private UserInfoService: UserInfoService,
+//     private userService: userService,
+//     private batteryService: batteryService,
+//     private batteryStockService: batteryStockService,
+//     private resourceService: resourceService,
+//     private jobService: jobService,
+//     public dialog: MatDialog,
+//     private vehicleService: vehicleService,
+//     private SocService: SocService,
+//     private alert: alert,
+//     public data: Data
+
+//   ) {
+//     this.allVehicles = this.resourceService.allVehicles;
+  
+//     //get all users remove this fun and get data from resource
+//     this.userService.getAllUsers().subscribe(res => {
+//       this.allUsers = res.data;
+//       // this.technicianList = res.data.filter(data => data.status == '')
+//     })
+//     this.userService.getAllTechnicians().subscribe(res => {
+//       this.technicianList = res.data;
+//     })
+//     this.getUserData(); //make this function in resource service and share in every components
+//     this.getParamsId();
+//     this.getAllJobs();
+//     // this.getAllVehicles();
+//   }
+
+//   // allVehicles;
+//   // //get all vehicles
+//   // getAllVehicles() {
+//   //   this.vehicleService.getAllVehicleList().subscribe(res => {
+//   //     this.allVehicles = res.data;
+//   //   })
+//   // }
+
+//   //get vehicle
+//   getVehicle(id: string) {
+//     let veh = this.allVehicles.find(data => data._id == id);
+//     if (veh) {
+//       return veh.title
+//     }
+//   }
+
+//   //get params id
+//   getParamsId() {
+//     this.route.params.subscribe((params: Params) => {
+//       if (params) {
+//         this.inqId = params.id;
+//         if (!this.inqId) {
+//           this.data.goBack();
+//           return;
+//         } else {
+//           // this.getTechnicianDetail(this.techId) //get tech detail
+//           this.getEnquiryDetail(this.inqId) // get tech stock detail
+//           this.getInquiryJobsWithTechnicianDetail(this.inqId) // get all inquiry jobs with detail
+//         }
+//       }
+//     });
+//   }
+
+//   //get inquiry  detail
+//   getEnquiryDetail(id: string) {
+//     this.inquiryService.getEnquiryById(id).subscribe(res => {
+//       this.inqData = res.data;
+//       if (this.inqData.serviceDetail[0].serviceType == 'Battery Change' && this.inqData.serviceDetail[0].isBattery) {
+//         this.getBatteryById(this.inqData.serviceDetail[0].battery)
+//       }
+//     })
+//   }
+
+
+
+//   ngOnInit() {
+
+//   }
+
+//   getUserName(id: string) {
+//     const user = this.allUsers.find(data => data._id == id);
+//     if (user) {
+//       return user.firstName + ' ' + user.lastName
+//     } else {
+//       return 'Na'
+//     }
+//   }
+
+
+//   userData;
+//   //get user data 
+//   getUserData() {
+//     let userId = this.UserInfoService.getAuthData();
+//     this.userService.getUserById(userId).subscribe(res => {
+//       this.userData = res.data
+//     })
+//   }
+
+//   batteryData;
+//   //get battery by id
+//   getBatteryById(id) {
+//     this.batteryService.getBatteryById(id).subscribe(res => {
+//       this.batteryData = res.data;
+//       this.getBatteryStockDetail(id);
+//     })
+//   }
+
+
+
+//   isLoad: boolean = false;
+//   batteryStock;
+//   //get battery stock
+//   getBatteryStockDetail(id) {
+//     let data = {
+//       batteryId: id
+//     }
+
+
+//     this.batteryStockService.getBatteryTechnicianWithJobs(id).subscribe(res => {
+//       //   console.log('res' + JSON.stringify(res))
+//       // })
+
+//       // this.batteryStockService.getBatteryStockDetails(data).subscribe(res => {
+//       this.batteryStock = res.data.filter(data => data.totalAssign > 0);
+//       let users = [];
+//       for (let i = 0; i < this.batteryStock.length; i++) {
+//         if (this.getUserLocation(this.batteryStock[i].techId) != 'Na') {
+//           users.push(this.batteryStock[i])
+
+//         }
+//       }
+//       this.batteryStock = users;
+//       this.sortUsersArray();
+//     })
+//   }
+
+
+//   getUserLocation(id: string) {
+//     const user = this.allUsers.find(data => data._id == id);
+//     if (user.data[0]) {
+//       return user
+//     } else {
+//       return 'Na'
+//     }
+//   }
+
+
+//   getLongLat(id) {
+//     const user = this.allUsers.find(data => data._id == id);
+//     if (user.data[0]) {
+//       return user.data[0].lat + ',' + user.data[0].long
+//     } else {
+//       return 'Na'
+//     }
+//   }
+
+
+
+//   //sort users distance base
+//   sortUsersArray() {
+//     for (let i = 0; i < this.batteryStock.length; i++) {
+//       const user = this.allUsers.find(data => data._id == this.batteryStock[i].techId);
+//       if (user.data.length > 0 && user.activeStatus == true) {
+//         let distance = this.data.getDistanceFromLatLonInKm(user.data[0].lat, user.data[0].long, this.inqData.address[0].lat, this.inqData.address[0].long)
+//         this.batteryStock[i].distance = distance;
+//         this.batteryStock[i].totalJobs = this.batteryStock[i].jobs.length;
+//       }
+
+
+
+//     }
+
+//     // console.log('bs' + JSON.stringify(this.batteryStock))
+//     this.batteryStock.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
+//     this.isLoad = true;
+//   }
+
+
+
+
+
+//   assignJob(techId: string) {
+
+//     let data = {
+//       userId: this.UserInfoService.getAuthData(),
+//       agentName: this.userData.firstName + ' ' + this.userData.lastName,
+//       inquiryId: this.inqData._id,
+//       serviceType: this.inqData.serviceType,
+//       inquiryDetailId: this.inqData._id,
+//       techId: techId
+//     }
+   
+//       this.jobService.addNewJob(data).subscribe(res => {
+//         if (!res.success) {
+//           this.alert.responseAlert(res.message, 'error');
+//         } else {
+//           this.alert.responseAlert(res.message, 'success');
+//           this.inqData.inquiryStatus = 'Close';
+//           this.inqData.orderStatus = 'Assigned';
+
+//           let notifData = {
+//             inquiryId:this.inqData.inquiryId,
+//             customerId:this.inqData.customerId,
+//             technicianId:techId,
+//             technicianName: this.getUserName(techId),
+//             title:'Job Assigned'
+//           }
+
+//           this.SocService.emit('assignJob', notifData);
+//           this.inquiryService.updateEnquiry(this.inqData._id, this.inqData).subscribe(res => {
+//             this.data.goBack();
+//           })
+//           this.data.onRefresh();
+//           // this.getAllCustomersList();
+
+//         }
+//       })
+//   }
+
+//   inquiryJobs;
+//   //get all inquiry jobs with technician detail
+//   getInquiryJobsWithTechnicianDetail(iquiryId: string) {
+//     this.jobService.getInquiryJobsWithTechnicianDetail(iquiryId).subscribe(res => {
+//       this.inquiryJobs = res.data;
+//     })
+//   }
+
+
+//   allJobs;
+//   //get all job assign
+//   getAllJobs() {
+//     this.jobService.getAllJobs().subscribe(res => {
+//       this.allJobs = res.data;
+//     })
+//   }
+
+//   //get customer total jobs
+//   getJobs(techId) {
+//     let job = this.allJobs.filter(data => data.techId == techId);
+//     if (job) {
+//       return job.length
+//     } else {
+//       return 0
+//     }
+//   }
+
+
+// }
+
+
+
+// <div class="app-main__outer">
+//     <div class="app-main__inner">
+//         <div class="app-page-title">
+//             <div class="page-title-wrapper">
+//                 <div class="page-title-heading">
+//                     <div class="page-title-icon">
+//                         <img src="assets/images/favicon2.png" alt="" width="36">
+//                     </div>
+//                     <div>BattMobile Dashboard
+//                         <!-- <div class="page-title-subheading">This is an example dashboard created using
+//                                 build-in elements and components.
+//                             </div> -->
+//                     </div>
+//                 </div>
+//                 <div class="page-title-actions">
+
+//                     <div class="d-inline-block ">
+//                         <button type="button" (click)="data.goBack()" aria-haspopup="true" aria-expanded="false"
+//                             class="btn-shadow  btn btn-info">
+//                             <span class="btn-icon-wrapper">
+//                                 <i class="pe-7s-angle-left fa-1x  fa-w-20"></i>
+//                             </span>
+//                             Back
+//                         </button>
+
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//         <div class="add-brands card" *ngIf="inqData">
+//             <div class="row">
+//                 <div class="col pt-3">
+//                     <h2 class="card-title">inquiry details</h2>
+//                 </div>
+//             </div>
+
+//             <div class="row mt-3">
+
+
+//                 <div class="col-6">
+//                     <div class="d-flex align-items-center justify-content-between">
+//                         <h4>Inquiry Status:<span><b>{{inqData.inquiryStatus}}</b></span> </h4>
+//                         <h4>Inquiry From:<span><b>{{inqData.inquiryFrom}}</b></span> </h4>
+//                     </div>
+
+
+
+
+//                     <h4 class="mt-5">Services Detail
+//                     </h4>
+//                     <ul *ngIf="inqData && batteryData">
+//                         <li>Service Type: <span class=""> <b>{{inqData.serviceDetail[0].serviceType}}</b> </span></li>
+
+//                         <li *ngIf="inqData.serviceDetail[0].serviceType == 'Battery Change'">Battery:
+//                             {{batteryData.title}}</li>
+
+//                         <li *ngIf="inqData.serviceDetail[0].serviceType == 'Car Wash'">Package:
+//                             {{inqData.serviceDetail[0].package}}</li>
+//                         <li
+//                             *ngIf="inqData.serviceDetail[0].serviceType == 'Oil Change' || inqData.serviceDetail[0].serviceType == 'Tire Change' ">
+//                             Appointment Date:
+//                             {{inqData.serviceDetail[0].appointmentDate}}</li>
+//                     </ul>
+//                     <ul *ngIf="inqData && inqData.serviceType != 'Battery Change'">
+//                         <li>Service Type: <span class=""> <b>{{inqData.serviceDetail[0].serviceType}}</b> </span></li>
+
+
+
+//                         <li *ngIf="inqData.serviceDetail[0].serviceType == 'Car Wash'">Package:
+//                             {{inqData.serviceDetail[0].package}}</li>
+//                         <li
+//                             *ngIf="inqData.serviceDetail[0].serviceType == 'Oil Change' || inqData.serviceDetail[0].serviceType == 'Tire Change' ">
+//                             Appointment Date:
+//                             {{inqData.serviceDetail[0].appointmentDate}}</li>
+
+
+
+//                     </ul>
+//                     <div class="mb-1">
+//                         <label for="exampleFormControlInput1" class="form-label"> Inquiry Remarks</label>
+//                         <textarea class="form-control" id="exampleFormControlInput1" readonly
+//                             [value]="inqData.inquiryNote"></textarea>
+//                     </div>
+//                     <div class="mb-1">
+//                         <label for="exampleFormControlInput1" class="form-label"> Inquiry Notes</label>
+//                         <textarea class="form-control" id="exampleFormControlInput1" readonly
+//                             [value]="inqData.remarks"></textarea>
+//                     </div>
+//                     <div class="mb-1">
+//                         <label for="exampleFormControlInput1" class="form-label"> Inquiry Detail</label>
+//                         <textarea class="form-control" id="exampleFormControlInput1" readonly
+//                             [value]="inqData.inquiryDetail"></textarea>
+//                     </div>
+
+//                 </div>
+
+//                 <div class="col-auto">
+//                     <div class="vl"></div>
+//                 </div>
+//                 <div class="col-lg-5">
+//                     <h4>Customer Detail
+//                     </h4>
+//                     <ul>
+//                         <li>Customer Name: {{inqData.personalInfo.firstName}} {{inqData.personalInfo.lastName}}</li>
+//                         <li>Customer Email: {{inqData.personalInfo.email}}</li>
+//                         <li>Contant {{inqData.contactNo}}</li>
+
+
+//                     </ul>
+//                     <h4>Address Detail
+//                     </h4>
+//                     <ul>
+//                         <li>Latitude: {{inqData.address[0].lat}} </li>
+//                         <li>Longitude: {{inqData.address[0].long}} </li>
+//                         <li>Nearest Address: {{inqData.address[0].address}}</li>
+//                     </ul>
+
+//                     <div *ngIf="inqData.vehicleDetail.length > 0">
+//                         <h4>Vehicle Detail
+//                         </h4>
+//                         <ul *ngFor="let veh of inqData.vehicleDetail">
+//                             <li>{{getVehicle(veh)}}</li>
+//                         </ul>
+//                     </div>
+//                 </div>
+
+
+
+
+//             </div>
+//         </div>
+
+//         <div class="row card mt-5">
+//             <div class="col-md-12"
+//                 *ngIf="inqData && inqData.inquiryStatus == 'Open' && inqData.serviceType == 'Battery Change'">
+//                 <div class="card-body">
+//                     <h3 class="card-title">ASSIGN TECHNICIAN</h3>
+//                     <table class="mb-0 table">
+//                         <thead>
+//                             <tr>
+//                                 <th>#</th>
+//                                 <th> Technician</th>
+//                                 <th>Stock</th>
+//                                 <th>Current Location</th>
+//                                 <th>Total Jobs Assign</th>
+//                                 <th>Assign</th>
+
+//                             </tr>
+//                         </thead>
+//                         <tbody>
+//                             <tr
+//                                 *ngFor="let stock of batteryStock  | paginate: { itemsPerPage: itemPerPage, currentPage: page } ; let i=index">
+//                                 <th scope="row"> <span *ngIf="page==1">{{(i+1)}}</span>
+//                                     <span *ngIf="page>1">{{((page-1)*itemPerPage)+(i+1)}}</span>
+//                                 </th>
+//                                 <!-- <td>{{getUserName(stock.techId)}}</td> -->
+//                                 <td>{{stock.totalAssign}}</td>
+
+//                                 <td>{{stock.distance | number }} km</td>
+//                                 <td>{{stock.totalJobs}}</td>
+//                                 <td> <button type="button" class="btn  btn-primary btn-sm"
+//                                         (click)='assignJob(stock.techId)'>Assign</button></td>
+//                             </tr>
+//                         </tbody>
+//                     </table>
+//                 </div>
+//             </div>
+
+//             <div class="col-md-12"
+//                 *ngIf="inqData && inqData.inquiryStatus == 'Open' && inqData.serviceType != 'Battery Change'">
+//                 <div class="card-body">
+//                     <h3 class="card-title">ASSIGN TECHNICIAN</h3>
+//                     <table class="mb-0 table">
+//                         <thead>
+//                             <tr>
+//                                 <th>#</th>
+//                                 <th> Technician</th>
+//                                 <!-- <th></th> -->
+//                                 <th>Assign</th>
+
+//                             </tr>
+//                         </thead>
+//                         <tbody>
+//                             <tr
+//                                 *ngFor="let item of technicianList  | paginate: { itemsPerPage: itemPerPage, currentPage: page } ; let i=index">
+//                                 <th scope="row"> <span *ngIf="page==1">{{(i+1)}}</span>
+//                                     <span *ngIf="page>1">{{((page-1)*itemPerPage)+(i+1)}}</span>
+//                                 </th>
+//                                 <td>{{item.firstName }} {{item.lastName}}</td>
+//                                 <!-- <td>{{stock.totalAssign}}</td> -->
+
+//                                 <!-- <td>{{stock.distance | number }} km</td> -->
+//                                 <!-- <td>{{stock.totalJobs}}</td> -->
+//                                 <td> <button type="button" class="btn  btn-primary btn-sm"
+//                                         (click)='assignJob(item._id)'>Assign</button></td>
+//                             </tr>
+//                         </tbody>
+//                     </table>
+//                 </div>
+//             </div>
+
+//             <div class="col-md-12">
+//                 <div class="card-body">
+//                     <h3 class="card-title">Inquiry Assign History</h3>
+//                     <table class="mb-0 table">
+//                         <thead>
+//                             <tr>
+//                                 <th>#</th>
+//                                 <th>Technician</th>
+//                                 <th>Status</th>
+//                                 <th>Remarks</th>
+
+//                             </tr>
+//                         </thead>
+//                         <tbody>
+//                             <tr *ngFor="let item of inquiryJobs ; let i=index">
+//                                 <th scope="row"> <span>{{(i+1)}}</span>
+
+//                                 </th>
+//                                 <td>{{item.technician.firstName}} {{item.technician.lastName}}</td>
+//                                 <!-- <td>{{stock.totalAssign}}</td> -->
+
+//                                 <!-- <td>{{stock.distance | number }} km</td> -->
+//                                 <td>{{item.status}}</td>
+//                                 <td><strong *ngIf="item.remarks">{{item.remarks}}</strong></td>
+
+//                             </tr>
+//                         </tbody>
+//                     </table>
+//                 </div>
+//             </div>
+//         </div>
+
+//     </div>
+// </div>

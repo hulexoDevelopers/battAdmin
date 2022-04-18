@@ -1,0 +1,365 @@
+<div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div class="page-title-icon">
+                             <img src="assets/images/favicon2.png" alt="" width="36">
+                    </div>
+                    <div>BattMobile Dashboard
+                        <div class="page-title-subheading">This is an example dashboard created using
+                            build-in elements and components.
+                        </div>
+                    </div>
+                </div>
+                <div class="page-title-actions">
+
+                    <div class="d-inline-block ">
+                        <button type="button" (click)="data.goBack()" aria-haspopup="true" aria-expanded="false"
+                            class="btn-shadow  btn btn-info">
+                            <span class="btn-icon-wrapper">
+                                <i class="pe-7s-angle-left fa-1x  fa-w-20"></i>
+                            </span>
+                            Back
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="add-brands card">
+            <div class="row">
+                <div class="col pt-3">
+                    <h2 class="card-title">Enquiry Form</h2>
+                </div>
+            </div>
+            <form name="form" (ngSubmit)="f.form.valid && saveNewInquiry()" #f="ngForm" novalidate>
+                <div class="row mt-3">
+
+
+                    <div class="col-7">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="  form-group"><label for="exampleEmail" class="">Enquiry
+                                        Date</label><input name="inqdate" placeholder="090088601" type="date" readonly
+                                        class="form-control" [ngModel]="today | date:'yyyy-MM-dd'">
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="  form-group"><label for="exampleEmail" class="">Enquiry
+                                        Time</label><input name="inqtime" placeholder="090088601" type="time"
+                                        [ngModel]="today | date : 'HH:mm'" class="form-control" readonly>
+
+                                </div>
+                            </div>
+
+                            <!-- <div class="col-lg-6">
+                                <div class="  form-group"><label for="exampleEmail" class="">Enquiry
+                                        id</label><input name="id" placeholder="090088601" type="text" readonly
+                                        class="form-control" [(ngModel)]="inquiry.inquiryId">
+
+                                </div>
+                            </div> -->
+
+
+                            <div class="col-lg-6">
+                                <div class="  form-group"><label for="exampleSelect" class="">Inquiry
+                                        Via</label>
+                                    <select name="select" id="exampleSelect" class="form-control"
+                                        (change)="inquiry.inquiryFrom == $event.target.value"
+                                        [(ngModel)]="inquiry.inquiryFrom" #inq="ngModel"
+                                        [ngClass]="{ 'is-invalid': f.submitted && inq.invalid }" required>
+                                        <option [value]="null" disabled>Please Select</option>
+                                        <option value="whatsapp">Whastapp</option>
+                                        <option value="call">Call</option>
+                                        <option value="email">Email</option>
+                                        <option value="app">App</option>
+
+
+                                    </select>
+                                    <div *ngIf="f.submitted && inq.invalid" class="invalid-feedback">
+                                        <div *ngIf="inq.errors.required">Please select
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-lg-6">
+                                <label for="exampleEmail" class="">Mobile
+                                    No</label>
+                                <div class="form-group input-group">
+
+                                    <input name="contact" placeholder="Enter mobile number" type="text"
+                                        class="form-control" [(ngModel)]="inquiry.contactNo" #con="ngModel"
+                                        [ngClass]="{ 'is-invalid': f.submitted && con.invalid }" required>
+                                    <div class="input-group-append">
+                                        <button (click)="checkCustomer()" type="button"
+                                            class="btn-shadow p-1 btn btn-primary btn-sm">
+                                            <i class="fa text-white fa-search pr-1 pl-1"></i>
+                                        </button>
+                                    </div>
+
+                                    <div *ngIf="f.submitted && con.invalid" class="invalid-feedback">
+                                        <div *ngIf="con.errors.required">Please enter customer contact
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="  form-group"><label for="exampleSelect" class="">Inquiry
+                                        Status</label>
+                                    <select name="istatus" id="exampleSelect" class="form-control"
+                                        (change)="inquiry.inquiryStatus == $event.target.value"
+                                        [(ngModel)]="inquiry.inquiryStatus" #iStatus="ngModel"
+                                        [ngClass]="{ 'is-invalid': f.submitted && iStatus.invalid }" required>
+                                        <option [value]="null" disabled>Please Select</option>
+                                        <option [value]="status" *ngFor="let status of inqStatus">{{status}}</option>
+                                    </select>
+                                    <div *ngIf="f.submitted && iStatus.invalid" class="invalid-feedback">
+                                        <div *ngIf="iStatus.errors.required">Please select status
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-12">
+                                <h4>Personal Information</h4>
+                            </div>
+                            <hr>
+
+                            <div class="col-lg-6">
+                                <div class="  form-group"><label for="exampleEmail" class="">First
+                                        Name</label><input name="fName" placeholder="Enter first name" type="text"
+                                        class="form-control" [(ngModel)]="user.firstName" #fName="ngModel">
+
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="  form-group"><label for="exampleEmail" class="">Last
+                                        Name</label><input name="name" placeholder="Enter last name" type="text"
+                                        class="form-control" [(ngModel)]="user.lastName">
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="  form-group"><label for="exampleEmail" class="">Email
+                                        Address</label><input name="email" placeholder="Enter email address"
+                                        type="email" class="form-control" [(ngModel)]="user.email" #email="ngModel"
+                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                        [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required>
+                                    <i *ngIf="email.valid" class="fa fa-check"></i>
+                                    <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                                        <div *ngIf="email.errors.required">Email is required</div>
+                                        <div *ngIf="email.errors.pattern">Invalid email</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="  form-group"><label for="exampleEmail" class="">Address</label><input
+                                        name="address" placeholder="Address" type="text" class="form-control"
+                                        [(ngModel)]="user.address" #adrs
+                                        [ngClass]="{ 'is-invalid': f.submitted && adrs.invalid }" required>
+                                    <div *ngIf="f.submitted && adrs.invalid" class="invalid-feedback">
+                                        <div *ngIf="adrs.errors.required">Address is required</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="position-relative form-group"><label for="exampleSelect"
+                                        class="">Emirate</label>
+                                    <select name="selectstate" id="exampleSelect" class="form-control"
+                                        (change)="stateChange($event)" [(ngModel)]="user.state" #stat="ngModel"
+                                        [ngClass]="{ 'is-invalid': f.submitted && stat.invalid }" required>
+                                        <option [ngValue]="null">Select Emirate</option>
+                                        <option [value]="state" *ngFor="let state of allStates">{{state}}</option>
+
+                                    </select>
+                                    <div *ngIf="f.submitted && stat.invalid && user.state == null"
+                                        class="invalid-feedback">
+                                        <div *ngIf="stat.errors.required">Emirate is required</div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-12 py-3">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h2 class="card-title">Customer Vehicles List</h2>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <button type="button" (click)="addVehicles()" class="btn-shadow  btn btn-info ">
+                                            Add Vehicles
+                                        </button>
+                                    </div>
+                                    <div class="col-12">
+                                        <table class="table table-hover table-custom spacing5"
+                                            *ngIf="customerVehicles.length > 0">
+                                            <thead>
+                                                <tr>
+                                                    <!-- <th>#</th> -->
+                                                    <th>Brand</th>
+                                                    <th>Model</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let car of customerVehicles">
+                                                    <td class="w100">{{getVehicleTitle(car).brand}}</td>
+                                                    <td><span>{{getVehicleTitle(car).model}}</span></td>
+                                                    <!-- <td><span>{{package.salePrice | number :'1.2-2'}}</span> AED</td> -->
+
+                                                    <td><button type="button" (click)="deleteVehicle(car)"
+                                                            class="btn btn-default btn-sm" title="Delete"><span
+                                                                class="sr-only">Delete</span>
+                                                            <i class="fa fa-trash"></i></button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="col-lg-12">
+
+                                <h4>Service Information</h4>
+                                <hr>
+                            </div>
+
+
+                            <div class="col-lg-12">
+                                <div class="  form-group"><label for="exampleSelect" class="">Services
+                                        Required</label>
+                                    <select name="service" class="form-control"
+                                        (change)="inquiry.serviceType == $event.target.value"
+                                        [(ngModel)]="inquiry.serviceType" #service="ngModel"
+                                        [ngClass]="{ 'is-invalid': f.submitted && service.invalid }" required>
+                                        <option [ngValue]="null">Select Service</option>
+                                        <option [value]="ser" *ngFor="let ser of offerServices">{{ser}}</option>
+
+                                    </select>
+                                    <div *ngIf="f.submitted && service.invalid" class="invalid-feedback">
+                                        <div *ngIf="stat.errors.required">Please select service</div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-6" *ngIf="inquiry.serviceType == 'Battery Change'">
+                                <div class="  form-group"><label for="exampleSelect" class="">Select Vehicle</label>
+                                    <ngx-select-dropdown [(ngModel)]="selectedVehicle" name="vehiicle"
+                                        [multiple]="false" (change)="vehicleChange($event)" [config]="vehicleConfig"
+                                        [options]="vehicles" #veh="ngModel"
+                                        [ngClass]="{ 'is-invalid': f.submitted && veh.invalid }" required>
+                                    </ngx-select-dropdown>
+
+                                    <div *ngIf="f.submitted && veh.invalid && (veh.dirty || veh.touched)"
+                                        class="validation-error">
+                                        <div *ngIf="veh.errors.required">Please select</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6" *ngIf="inquiry.serviceType == 'Battery Change'">
+                                <div class="  form-group"><label for="exampleSelect" class="">Recommended
+                                        Batteries</label>
+                                    <ngx-select-dropdown [(ngModel)]="selectedBattery" name="battery" [multiple]="false"
+                                        (change)="batteryChange($event)" [config]="vehicleConfig"
+                                        [options]="recomendedBatteries" #rb="ngModel">
+                                    </ngx-select-dropdown>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6" *ngIf="inquiry.serviceType == 'Car Wash'">
+                                <div class="  form-group"><label for="exampleSelect" class="">Select Package</label>
+                                    <select name="selectpkg" id="exampleSelect" class="form-control"
+                                        (change)="selectedpackage== $event.target.value" [(ngModel)]="selectedpackage"
+                                        #pkg="ngModel" [ngClass]="{ 'is-invalid': f.submitted && pkg.invalid }"
+                                        required>
+                                        <option [value]="null" disabled>Please Select package</option>
+                                        <option value="bronze">Bronze</option>
+                                        <option value="silver">Silver</option>
+                                        <option value="gold">Gold</option>
+                                    </select>
+                                    <div *ngIf="f.submitted && pkg.invalid" class="invalid-feedback">
+                                        <div *ngIf="pkg.errors.required">Please select
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12" *ngIf="inquiry.serviceType == 'Car Wash' && selectedpackage">
+                                <button type="button" (click)="viewPackageDetail()"
+                                    class="btn-shadow  btn btn-info mx-2">
+                                    package Detail
+                                </button>
+                            </div>
+
+
+                            <div class="col-lg-12">
+                                <div class="  form-group"><label for="exampleEmail" class="">Notes:</label><textarea
+                                        name="notes" placeholder="Inquiry Notes" type="text" class="form-control"
+                                        [(ngModel)]="inquiry.inquiryNote" #inotes></textarea>
+                                    <!-- <div *ngIf="f.submitted && inotes.invalid" class="invalid-feedback">
+                                        <div *ngIf="inotes.errors.required"> is required</div>
+
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col">
+                                <div class="text-right form-group">
+                                    <button id='resetBtn' type="reset" class="btn btn-outline-secondary">Cancel</button>
+                                    <button type="submit" class="btn btn-primary" [disabled]="isDisabled">Submit
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-auto">
+                        <div class="vl"></div>
+                    </div>
+                    <div class="col-lg-4">
+                        <h5>Choose Location From Map</h5>
+
+
+                        <!-- Uploaded image area-->
+
+
+                        <div class="image-area user-imag mt-4"><img id="imageResult" src="assets/images/map.jpeg" alt=""
+                                class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+
+                    </div>
+
+
+
+
+                </div>
+            </form>
+        </div>
+
+
+
+    </div>
+</div>

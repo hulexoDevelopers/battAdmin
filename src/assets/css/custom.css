@@ -1,0 +1,350 @@
+a {
+    text-decoration: none!important;
+}
+
+.logincard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logincard div.cardbody {
+    width: 500px;
+    min-height: 500px;
+    padding: 20px;
+}
+
+.cardbody .img-logo {
+    width: 70%;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cardbody .img-logo img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.logincard h1 {
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 120%;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: #000000;
+    padding-bottom: 40px;
+}
+
+.table td,
+.table th {
+    text-transform: capitalize;
+}
+
+
+/* Font Awesome Icons */
+
+.logincard div.cardbody .fa {
+    top: 56%;
+    right: 1rem;
+    border-radius: 50%;
+    background: #003c57;
+    /* border    : 1px solid #003c57; */
+    padding: 5px;
+    color: white;
+    position: absolute;
+    font-size: 11px;
+    line-height: 12px;
+    width: 20px;
+    height: 20px;
+}
+
+#loginForm .form-group .form-control {
+    border-radius: 4px;
+    padding: 16px 25px;
+    border: 0px;
+    background: #FAFAFA;
+}
+
+#loginForm .form-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+#loginForm .form-group .form-label {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #575757;
+}
+
+#loginForm .form-group input::placeholder {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    color: #2D3748;
+}
+
+.forget-pass {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: right;
+}
+
+.forget-pass a {
+    text-decoration: none;
+    color: #003c57;
+}
+
+.forget-pass a:hover {
+    color: #F15422;
+}
+
+.actionbtns {
+    margin-top: 20px;
+}
+
+.actionbtns .btn {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    padding: 13px 25px;
+    width: 100%;
+}
+
+.actionbtns .btn-outline-secondary:hover {
+    background: #4B4B4B;
+}
+
+.actionbtns .ortext {
+    text-align: center;
+    position: relative;
+    font-size: 16px;
+    padding: 0px 0;
+}
+
+.actionbtns .ortext span:before {
+    position: absolute;
+    content: '';
+    width: 25%;
+    height: 1px;
+    border: 1px solid #A5ADBB;
+    top: 50%;
+    left: 1%;
+}
+
+.actionbtns .ortext span:after {
+    position: absolute;
+    content: '';
+    width: 25%;
+    height: 1px;
+    border: 1px solid #A5ADBB;
+    top: 50%;
+    right: 1%;
+}
+
+.min-container {
+    margin: 0 auto;
+}
+
+
+/* add vehicle */
+
+.add-brands {
+    padding: 0px 20px;
+}
+
+.add-brands .plus-icon {
+    margin-top: 31px;
+}
+
+.vl {
+    border-left: 1px solid #ced4da;
+    height: 100%;
+    width: 5px;
+    margin: 0 auto;
+}
+
+#upload {
+    opacity: 0;
+}
+
+#upload-label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+}
+
+.image-area {
+    border: 2px dashed #ced4da;
+    padding: 1rem;
+    position: relative;
+    height: 300px;
+    min-height: 300px;
+}
+
+.image-area::before {
+    content: '';
+    color: #343a40;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8rem;
+    z-index: 1;
+}
+
+.image-area img {
+    z-index: 2;
+    position: relative;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.pe-7s-trash :hover {
+    content: "";
+    color: yellow;
+}
+
+.txtcap {
+    text-transform: capitalize;
+}
+
+.btn-circle {
+    background: #f3f3f3;
+    border-radius: 50%;
+    padding: 2px;
+    width: 32px;
+    height: 32px;
+    transition: background-color 0.5s ease;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.btn-circle:hover {
+    background: #EFA627;
+    color: #FAFAFA;
+}
+
+.img-thumbnail {
+    max-height: 230px;
+}
+
+::-webkit-input-placeholder {
+    opacity: 1;
+    -webkit-transition: opacity .5s;
+    transition: opacity .5s;
+}
+
+
+/* Chrome <=56, Safari < 10 */
+
+:-moz-placeholder {
+    opacity: 1;
+    -moz-transition: opacity .5s;
+    transition: opacity .5s;
+}
+
+
+/* FF 4-18 */
+
+::-moz-placeholder {
+    opacity: 1;
+    -moz-transition: opacity .5s;
+    transition: opacity .5s;
+}
+
+
+/* FF 19-51 */
+
+:-ms-input-placeholder {
+    opacity: 1;
+    -ms-transition: opacity .5s;
+    transition: opacity .5s;
+}
+
+
+/* IE 10+ */
+
+::placeholder {
+    opacity: 1;
+    transition: opacity .5s;
+}
+
+
+/* Modern Browsers */
+
+*:focus::-webkit-input-placeholder {
+    opacity: 0;
+}
+
+
+/* Chrome <=56, Safari < 10 */
+
+*:focus:-moz-placeholder {
+    opacity: 0;
+}
+
+
+/* FF 4-18 */
+
+*:focus::-moz-placeholder {
+    opacity: 0;
+}
+
+
+/* FF 19-50 */
+
+*:focus:-ms-input-placeholder {
+    opacity: 0;
+}
+
+
+/* IE 10+ */
+
+*:focus::placeholder {
+    opacity: 0;
+}
+
+
+/* Modern Browsers */
+
+ngx-select-dropdown {
+    text-transform: capitalize;
+}
+
+.agent-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+    font-weight: 500;
+    color: dimgray;
+}
+
+.agent-info span {
+    padding-left: 5px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.agent-info p {
+    margin-bottom: 0px;
+}
+
+.maplocation {
+    border: 2px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+    object-fit: cover;
+}

@@ -1,0 +1,168 @@
+
+    <div class="app-main__outer" *ngIf="technician">
+        <div class="app-main__inner">
+            <div class="app-page-title">
+                <div class="page-title-wrapper">
+                    <div class="page-title-heading">
+                        <div class="page-title-icon">
+                                <img src="assets/images/favicon2.png" alt="" width="36">
+                        </div>
+                        <div>Technician Dashboard
+                            <!-- <div class="page-title-subheading">This is an example dashboard created using build-in
+                                elements and components.
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="page-title-actions">
+
+                        <div class="d-inline-block ">
+                            <button type="button" (click)="data.goBack()" aria-haspopup="true" aria-expanded="false"
+                                class="btn-shadow  btn btn-info">
+                                <span class="btn-icon-wrapper">
+                                    <i class="pe-7s-angle-left fa-1x  fa-w-20"></i>
+                                </span>
+                                Back
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+
+
+
+                <div class="col-lg-3">
+                    <div class="card mb-3 widget-content bg-midnight-bloom">
+                        <div class="widget-content-wrapper text-white">
+                            <div class="widget-content-left">
+                                <div class="widget-heading">Total Inquries</div>
+                                <div class="widget-subheading"></div>
+                            </div>
+                            <div class="widget-content-right">
+                                <div class="widget-numbers text-white"><span>1896</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card mb-3 widget-content bg-arielle-smile">
+                        <div class="widget-content-wrapper text-white">
+                            <div class="widget-content-left">
+                                <div class="widget-heading">Completed</div>
+                                <div class="widget-subheading"></div>
+                            </div>
+                            <div class="widget-content-right">
+                                <div class="widget-numbers text-white"><span>16</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card mb-3 widget-content bg-grow-early">
+                        <div class="widget-content-wrapper text-white">
+                            <div class="widget-content-left">
+                                <div class="widget-heading">Pending</div>
+                                <div class="widget-subheading"></div>
+                            </div>
+                            <div class="widget-content-right">
+                                <div class="widget-numbers text-white"><span>96</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card mb-3 widget-content bg-premium-dark">
+                        <div class="widget-content-wrapper text-white">
+                            <div class="widget-content-left">
+                                <div class="widget-heading">In-Progress</div>
+                                <div class="widget-subheading"></div>
+                            </div>
+                            <div class="widget-content-right">
+                                <div class="widget-numbers text-white"><span>186</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">John Smith Technician Details</h3>
+                            <div class="table-responsive">
+                                <table class="mb-0 table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Battery Name</th>
+                                            <th>Total Assign</th>
+                                            <th>Total Sale</th>
+                                            <th>Available</th>
+                                            <th>Assign Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let stock of techStock ; let i=index">
+                                            <td scope="row">{{i+1}}</td>
+                                            <td>{{resourceService.getBatteryNameById(stock._id)}}</td>
+                                            <td>{{stock.totalAssign}} </td>
+                                            <td>0</td>
+                                            <td>{{stock.totalAssign}} </td>
+                                            <td>{{stock.date[0] | date}}</td>
+                                            <td> <button type="button" title="Detail"
+                                                    (click)="editTechnicianStock(stock._id)"
+                                                    class="btn btn-circle btn-default btn-sm"><span
+                                                        class="sr-only">Detail</span><i class="fa fa-eye"></i></button>
+                                            </td>
+
+                                        </tr>
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+
+
+
+                    <section class="section">
+
+                        <div class="card py-3 px-4">
+                            <h3 class="card-title">Change Password</h3>
+
+                            <div class="form-group"><label for="exampleEmail" class="">New
+                                    Password</label><input name="Password" id="exampleEmail" placeholder="New Password"
+                                    type="email" class="form-control"></div>
+
+
+                            <div class="form-group"><label for="exampleEmail" class="">Confirm
+                                    New
+                                    Password</label><input name="Password" id="exampleEmail"
+                                    placeholder="Confirm New Password" type="email" class="form-control"></div>
+
+                            <div class="form-group">
+                                <button disabled class="mb-2 mr-2 btn btn-primary mt-1">Update Password
+                                </button>
+                                <button disabled type="button" class="btn btn-outline-secondary ">Cancel</button>
+                            </div>
+                        </div>
+
+                    </section>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+

@@ -1,0 +1,111 @@
+<div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div class="page-title-icon">
+                        <img src="assets/images/favicon2.png" alt="" width="36">
+                    </div>
+                    <div>Analytics Dashboard
+                    </div>
+                </div>
+                <div class="page-title-actions">
+                    <label>Filter by Date:</label>
+                    <!-- <input class="form-control" id="exampleInput2bis" placeholder="Date" type="date"> -->
+
+                    <input type="date" class="form-control round" id="date" (change)="dateChange()" name="date"
+                        [(ngModel)]="date" #dt="ngModel">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-4 col-sm-12">
+                <div class="card mb-3 widget-content bg-midnight-bloom">
+                    <div class="widget-content-wrapper text-white">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Total Enquiries</div>
+                            <div class="widget-subheading">Request from customers</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers text-white"><span>{{totalInquiries}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="card mb-3 widget-content bg-arielle-smile">
+                    <div class="widget-content-wrapper text-white">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Total Open</div>
+                            <div class="widget-subheading">Align to serve</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers text-white"><span>{{open}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="card mb-3 widget-content bg-grow-early">
+                    <div class="widget-content-wrapper text-white">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">In Process</div>
+                            <div class="widget-subheading">Currently serving</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers text-white"><span>{{inProcess}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+                <div class="card mb-3 widget-content bg-completed">
+                    <div class="widget-content-wrapper text-white">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Completed</div>
+                            <div class="widget-subheading">We have served</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers text-white"><span>{{close}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+                <div class="card mb-3 widget-content bg-rejected">
+                    <div class="widget-content-wrapper text-white">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Total Rejected</div>
+                            <div class="widget-subheading">Unentertained Requests</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers text-white"><span>{{rejected}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="card mb-3 widget-content bg-pending">
+                    <div class="widget-content-wrapper text-white">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Total Pending</div>
+                            <div class="widget-subheading">We are holding to assign</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers text-white"><span>{{open}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 mt-4 text-center">
+                <button type="button" class="btn btn-secondary" (click)="getAllInquiries()">Reset to View All</button>
+            </div>
+        </div>
+    </div>
+</div>

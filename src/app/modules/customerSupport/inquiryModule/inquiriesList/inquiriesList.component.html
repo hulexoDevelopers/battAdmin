@@ -1,0 +1,152 @@
+<div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div class="page-title-icon">
+                        <img src="assets/images/favicon2.png" alt="" width="36">
+                    </div>
+                    <div>BattMobile Dashboard
+                        <!-- <div class="page-title-subheading">This is an example dashboard created using
+                                build-in elements and components.
+                            </div> -->
+                    </div>
+                </div>
+                <div class="page-title-actions">
+
+                    <div class="d-inline-block ">
+                        <button type="button" (click)="data.goBack()" aria-haspopup="true" aria-expanded="false"
+                            class="btn-shadow  btn btn-info">
+                            <span class="btn-icon-wrapper">
+                                <i class="pe-7s-angle-left fa-1x  fa-w-20"></i>
+                            </span>
+                            Back
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row  card mt-5">
+            <div class="col-12">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <label>Search By keyword</label>
+                            <div class="input-group">
+                                <input type="text" placeholder="Search..." [(ngModel)]="globalSearch"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-6">
+                            <label>Inquiry Status</label>
+                            <div class="input-group">
+                                <select name="" class="form-control" (change)="statusChange($event)">
+                                    <option value="all">All</option>
+                                    <option value="open">Open</option>
+                                    <option value="close">Close</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-6">
+                            <label>Order Status</label>
+                            <div class="input-group">
+                                <select name="" class="form-control" (change)="serviceType($event)">
+                                    <option value="all">All</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="assigned">Assigned</option>
+                                    <option value="in process">In Process</option>
+                                    <option value="rejected">Rejected</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <label>Filter by date</label>
+                            <input type="date" class="form-control round" ame="date" (change)="dateChange()" name="date"
+                                [(ngModel)]="date" #dt="ngModel">
+                        </div>
+                        <div class="col-md-2 col-sm-6 self-align-right">
+                            <label>Show entries</label>
+                            <div class="input-group">
+                                <select name="" class="form-control" (change)="itemPerPage = $event.target.value">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="25" selected>25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row card mt-5 my-5">
+            <div class="col-lg-12">
+                <h3 class="card-title mt-4"> Enquiries List</h3>
+                <p>Showing <span *ngIf="allInquiries.length > itemPerPage">{{itemPerPage}}</span> <span
+                        *ngIf="allInquiries.length <= itemPerPage">{{allInquiries.length}}</span> of
+                    {{allInquiries.length}}</p>
+                <table class="mb-0 table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Inquiry Id</th>
+                            <th>Agent Name</th>
+                            <th>Customer Name</th>
+                            <th>Service Type</th>
+                            <th>Mobile</th>
+                            <!-- <th>Location</th> -->
+                            <th>Inquiry Status</th>
+                            <th>Order Status</th>
+                            <th>Edit</th>
+                            <th *ngIf="userData && userData.data[0].allowDispatch == 'yes'">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let inq of allInquiries | filter:globalSearch | paginate: { itemsPerPage: itemPerPage, currentPage: page } ; let i=index">
+                            <th scope="row"> <span *ngIf="page==1">{{(i+1)}}</span>
+                                <span *ngIf="page>1">{{((page-1)*itemPerPage)+(i+1)}}</span>
+                            </th>
+                            <td>{{inq.inquiryId}}</td>
+                            <td *ngIf="inq.inquiryFrom != 'Mobile App'">{{getUserName(inq.userId)}}</td>
+                            <td *ngIf="inq.inquiryFrom == 'Mobile App'">Customer</td>
+                            <td>
+                                <a [routerLink]="['/dashboard/customer/detail', inq.customerId]"
+                                    routerLinkActive="router-link-active">{{inq.personalInfo.firstName}}
+                                    {{inq.personalInfo.lastName}}</a>
+                            </td>
+                            <td>{{inq.serviceDetail[0].serviceType}} </td>
+                            <td>{{inq.contactNo}}</td>
+                            <!-- <td>{{inq.address[0].address}}, {{inq.address[0].state}}</td> -->
+                            <!-- Add class 'badge badge-success' to close status -->
+                            <td class="text-center"><span
+                                    [ngClass]="{'badge badge-danger': inq.inquiryStatus === 'Open','badge badge-success': inq.inquiryStatus === 'Close'}"><b
+                                        class="px-2 py-1">{{inq.inquiryStatus}}</b></span>
+                            </td>
+                            <td>{{inq.orderStatus}}</td>
+                            <td> <button [routerLink]="['/support/inquiry/edit', inq._id]" type="button"
+                                    class="btn  btn-warning btn-sm">Edit</button></td>
+                            <td *ngIf="userData.data[0].allowDispatch == 'yes'"> <button
+                                    [routerLink]="['/support/inquiry/detail', inq._id]"
+                                    routerLinkActive="router-link-active" type="button"
+                                    class="btn  btn-primary btn-sm">Detail</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row mt-5" *ngIf="allInquiries">
+            <div class="col-12">
+                <pagination-controls (pageChange)="page = $event" style="text-align: center">
+                </pagination-controls>
+            </div>
+        </div>
+
+    </div>
+</div>

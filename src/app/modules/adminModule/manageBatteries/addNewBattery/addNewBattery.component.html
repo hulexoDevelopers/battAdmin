@@ -1,0 +1,211 @@
+<div class="app-main__outer" #moveTop>
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div class="page-title-icon">
+                        <img src="assets/images/favicon2.png" alt="" width="36">
+                    </div>
+                    <div>BattMobile Dashboard
+                    </div>
+                </div>
+                <div class="page-title-actions">
+                    <div class="d-inline-block ">
+                        <button type="button" (click)="data.goBack()" aria-haspopup="true" aria-expanded="false" class="btn-shadow  btn btn-info">
+                            <span class="btn-icon-wrapper">
+                                <i class="pe-7s-angle-left fa-1x  fa-w-20"></i>
+                            </span>
+                            Back
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="add-brands card">
+            <div class="row">
+                <div class="col pt-3">
+                    <h2 class="card-title">Add New Battery</h2>
+                </div>
+            </div>
+            <form name="form" (ngSubmit)="f.form.valid && saveNewBattery()" #f="ngForm" novalidate>
+                <div class="row mt-3">
+                    <div class="col-7">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="position-relative form-group"><label for="exampleSelect" class="">Battery Brand</label>
+                                            <ngx-select-dropdown [(ngModel)]="brand" name="companyName" [multiple]="false" (change)="brandChange($event)" [config]="brandConfig" [options]="allBrands" #companyId="ngModel" [ngClass]="{'is-invalid': f.submitted && companyId.invalid }" required>
+                                            </ngx-select-dropdown>
+                                            <div *ngIf="!isCompany && f.submitted" class="validation-error">
+                                                <div>Brand is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 plus-icon">
+                                        <button type="button" class="btn mr-2 mb-2 btn-primary" (click)="addNewcompany()">
+                                            <i class="fas fa-plus fa-1x"></i> Add New Brand
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="position-relative form-group">
+                                    <label for="exampleEmail" class=""> Battery Model</label>
+                                    <input name="model" type="text" [(ngModel)]="battery.title" id="exampleEmail" placeholder="title" class="form-control" #bTitle="ngModel" [ngClass]="{ 'is-invalid': f.submitted && bTitle.invalid }" required>
+                                    <div *ngIf="f.submitted && bTitle.invalid" class="invalid-feedback">
+                                        <div *ngIf="bTitle.errors.required">Please enter title
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="position-relative form-group"><label for="exampleEmail" class="">Price
+                                        (AED)</label><input name="price" type="number" id="exampleEmail" [(ngModel)]="battery.price" placeholder="000" class="form-control" #bPrice="ngModel" [ngClass]="{ 'is-invalid': f.submitted && bPrice.invalid }" required>
+                                    <div *ngIf="f.submitted && bPrice.invalid" class="invalid-feedback">
+                                        <div *ngIf="bPrice.errors.required">Please enter price
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="position-relative form-group"><label for="exampleEmail" class="">Quantity</label><input name="quantity" type="number" [(ngModel)]="battery.quantity" #bQuantity="ngModel" id="exampleEmail" placeholder="quantity" [ngClass]="{ 'is-invalid': f.submitted && bQuantity.invalid }"
+                                        required class="form-control">
+                                    <div *ngIf="f.submitted && bQuantity.invalid" class="invalid-feedback">
+                                        <div *ngIf="bQuantity.errors.required">Please enter quantity
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="position-relative form-group"><label for="exampleEmail" class="">Warranty</label><input name="warranty" type="text" [(ngModel)]="battery.warranty" #bWarranty="ngModel" id="exampleEmail" placeholder="Warranty" [ngClass]="{ 'is-invalid': f.submitted && bWarranty.invalid }"
+                                        required class="form-control">
+                                    <div *ngIf="f.submitted && bWarranty.invalid" class="invalid-feedback">
+                                        <div *ngIf="bWarranty.errors.required">Please enter battery warranty
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="position-relative form-group"><label for="exampleText" class="">Description</label><textarea name="detail" id="exampleText" class="form-control" [(ngModel)]="battery.detail" #bDetail="ngModel" [ngClass]="{ 'is-invalid': f.submitted && bDetail.invalid }"
+                                        required></textarea>
+                                    <div *ngIf="f.submitted && bDetail.invalid" class="invalid-feedback">
+                                        <div *ngIf="bDetail.errors.required">Please enter detail
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col">
+                                <div class="text-right form-group">
+
+                                    <button id="cancelBtn" type="reset" class="btn btn-outline-secondary mr-2">Cancel</button>
+                                    <button [disabled]="disabled" type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-auto">
+                        <div class="vl"></div>
+                    </div>
+                    <div class="col-lg-4">
+                        <h5>Upload Battery Model Image</h5>
+                        <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                            <input id="upload" type="file" #myInput (change)="onImagePicked($event)" class="form-control border-0">
+                            <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose
+                                file</label>
+                            <div class="input-group-append">
+                                <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i
+                                        class="fa fa-cloud-upload mr-2 text-muted"></i><small
+                                        class="text-uppercase font-weight-bold text-muted">Choose
+                                        file</small></label>
+                            </div>
+                        </div>
+
+                        <div *ngIf="inValidImage ||  invalidType" class="small text-danger">
+                            <h6>Invalid Image</h6>
+                        </div>
+                        <!-- Uploaded image area-->
+                        <p class="font-italic text-center">The image uploaded will be rendered inside the box below.
+                        </p>
+                        <div class="image-area mt-4">
+                            <img *ngIf="!image" id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+
+                            <img *ngIf="image" id="imageResult" [src]="imagePreview" alt="" class="img-fluid rounded shadow-sm mx-auto d-block" #myInput>
+                            <!-- <img *ngIf="!image" class="img-thumbnail rounded"
+                                    src="assets/images/brand-placeholder.png" alt=""> -->
+                            <!-- <img *ngIf="image" class="img-thumbnail rounded" [src]="imagePreview" alt=""> -->
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+            </form>
+        </div>
+
+        <section class="card mt-5">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card-body">
+                        <h3 class="card-title">Battery List</h3>
+                        <table class="mb-0 table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Model </th>
+                                    <th>Company</th>
+                                    <th>Warranty</th>
+                                    <th>Logo</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let btry of allBatteries  | paginate: { itemsPerPage: itemPerPage, currentPage: page } ; let i=index">
+                                    <th scope="row"> <span *ngIf="page==1">{{(i+1)}}</span>
+                                        <span *ngIf="page>1">{{((page-1)*itemPerPage)+(i+1)}}</span>
+                                    </th>
+
+                                    <td><a [routerLink]="['/dashboard/battery/detail', btry._id]" routerLinkActive="router-link-active">{{btry.title}}</a> </td>
+                                    <td>{{getCompanyTitle(btry.companyId)}}</td>
+                                    <td>+</td>
+                                    <td>
+                                        <img *ngIf="btry.imageUrl == '--'" width="40" class="rounded-circle" src="assets/images/avatars/battery logo.png" alt="">
+                                        <img *ngIf="btry.imageUrl != ''" width="40" class="rounded-circle" [src]="btry.imageUrl" alt="">
+                                    </td>
+
+
+                                    <td>
+
+
+                                        <button type="button" (click)="editBattery(btry._id)" title="Edit battery" class="btn btn-circle btn-default btn-sm"><span
+                                                class="sr-only">Edit</span><i class="fa fa-pencil-alt"></i></button>
+
+                                        <button type="button" title="Delete" (click)="deleteBattery(btry._id)" class="btn btn-circle btn-default btn-sm"><span
+                                                class="sr-only">Delete</span><i class="fa fa-trash"></i></button>
+                                    </td>
+
+                                </tr>
+
+
+
+                            </tbody>
+                        </table>
+                        <div class="pagination-block text-right" *ngIf="allBatteries && allBatteries.length > itemPerPage">
+                            <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

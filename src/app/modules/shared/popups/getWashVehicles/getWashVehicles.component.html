@@ -1,0 +1,32 @@
+<h3>Add New Customer Vehicles</h3>
+<form class="" name="vehForm" #f1="ngForm" novalidate>
+  <!--form group-->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group"><label for="exampleSelect" class="">Vehicle Brand</label>
+        <ngx-select-dropdown [(ngModel)]="brand" name="brand" [multiple]="false"
+          (change)="getBrandVehicles($event.value._id)" [config]="brandConfig" [options]="allCarBrands" #type="ngModel"
+          [ngClass]="{ 'is-invalid': f1.submitted && type.invalid }" required>
+        </ngx-select-dropdown>
+
+      </div>
+
+      <div class="form-group"><label for="exampleSelect" class="">Vehicle Model</label>
+        <ngx-select-dropdown [(ngModel)]="vehicle" name="model" [multiple]="false" (change)="getVehicle($event)"
+          [config]="brandConfig" [options]="brandVehicles" #veh="ngModel"
+          [ngClass]="{ 'is-invalid': f1.submitted && veh.invalid }" required>
+        </ngx-select-dropdown>
+
+      </div>
+
+
+
+
+    </div>
+
+  </div>
+  <div class="text-right">
+    <button type="button" class="btn btn-secondary mx-1" (click)="onClose()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="saveVehicle()" [disabled]=" disabled">Save</button>
+  </div>
+</form>

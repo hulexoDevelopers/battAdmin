@@ -1,0 +1,300 @@
+<div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div class="page-title-icon">
+                             <img src="assets/images/favicon2.png" alt="" width="36">
+                    </div>
+                    <div>BattMobile Dashboard
+                        <!-- <div class="page-title-subheading">This is an example dashboard created using
+                                build-in elements and components.
+                            </div> -->
+                    </div>
+                </div>
+                <div class="page-title-actions">
+
+                    <div class="d-inline-block ">
+                        <button type="button" aria-haspopup="true" aria-expanded="false" (click)="data.goBack()"
+                            class="btn-shadow  btn btn-info">
+                            <span class="btn-icon-wrapper">
+                                <i class="pe-7s-angle-left fa-1x  fa-w-20"></i>
+                            </span>
+                            Back
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="add-brands card">
+            <div class="row">
+                <div class="col pt-3">
+                    <h2 class="card-title">Add New Customer</h2>
+                </div>
+            </div>
+
+            <form name="form" (ngSubmit)="f.form.valid && saveNewCustomer()" #f="ngForm" novalidate>
+                <div class="row mt-3">
+
+
+                    <div class="col-7">
+
+
+
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="position-relative form-group"><label for="exampleEmail" class="">First
+                                        Name</label><input [(ngModel)]="customer.firstName" name="fName"
+                                        #fName="ngModel" id="exampleEmail" placeholder="Enter first name" type="text"
+                                        class="form-control" [ngClass]="{ 'is-invalid': f.submitted && fName.invalid }"
+                                        required>
+
+                                    <div *ngIf="f.submitted && fName.invalid" class="invalid-feedback">
+                                        <div *ngIf="fName.errors.required">Please enter first name
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="position-relative form-group"><label for="exampleEmail" class="">Last
+                                        Name</label><input name="lName" placeholder="Enter last name" type="text"
+                                        class="form-control" [(ngModel)]="customer.lastName" #lName="ngModel"
+                                        [ngClass]="{ 'is-invalid': f.submitted && lName.invalid }" required>
+
+                                    <div *ngIf="f.submitted && lName.invalid" class="invalid-feedback">
+                                        <div *ngIf="lName.errors.required">Please enter last name
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="position-relative form-group"><label for="exampleEmail" class="">Email
+                                        Address</label><input name="email" id="exampleEmail"
+                                        placeholder="Enter email address" type="email" class="form-control"
+                                        [(ngModel)]="customer.email" #email="ngModel"
+                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                        [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required>
+                                    <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                                        <div *ngIf="email.errors.required">Email is required</div>
+                                        <div *ngIf="email.errors.pattern">Invalid email</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="position-relative form-group"><label for="exampleEmail" class="">Mobile
+                                        No</label><input name="contact" placeholder="Enter mobile number" type="tel"
+                                        class="form-control" [(ngModel)]="customer.contact" #contact="ngModel"
+                                        [ngClass]="{ 'is-invalid': f.submitted && contact.invalid }" required />
+                                    <div *ngIf="f.submitted && contact.invalid" class="invalid-feedback">
+                                        <div *ngIf="contact.errors.required">Contact is required</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="position-relative form-group"><label for="exampleEmail"
+                                        class="">Address</label><input name="address" placeholder="Address" type="text"
+                                        class="form-control" [(ngModel)]="customer.address" #address="ngModel"
+                                        [ngClass]="{ 'is-invalid': f.submitted && address.invalid }" required>
+                                    <div *ngIf="f.submitted && address.invalid" class="invalid-feedback">
+                                        <div *ngIf="address.errors.required">Address is required</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="position-relative form-group"><label for="exampleSelect"
+                                        class="">Emirate</label>
+                                    <select name="select" id="exampleSelect" class="form-control"
+                                        (change)="stateChange($event)" [(ngModel)]="state" #stat="ngModel"
+                                        [ngClass]="{ 'is-invalid': f.submitted && stat.invalid }" required>
+                                        <option [ngValue]="null">Select Emirate</option>
+                                        <option [value]="state" *ngFor="let state of allStates">{{state}}</option>
+
+                                    </select>
+                                    <div *ngIf="f.submitted && stat.invalid" class="invalid-feedback">
+                                        <div *ngIf="stat.errors.required">Emirate is required</div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-12 py-3">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h2 class="card-title">Customer Vehicles List</h2>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <button type="button" (click)="addVehicles()" class="btn-shadow  btn btn-info ">
+                                            Add Vehicles
+                                        </button>
+                                    </div>
+                                    <div class="col-12">
+                                        <table class="table table-hover table-custom spacing5"
+                                            *ngIf="customerVehicles.length > 0">
+                                            <thead>
+                                                <tr>
+                                                    <!-- <th>#</th> -->
+                                                    <th>Brand</th>
+                                                    <th>Model</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let car of customerVehicles">
+                                                    <td class="w100">{{getVehicleTitle(car).brand}}</td>
+                                                    <td><span>{{getVehicleTitle(car).model}}</span></td>
+                                                    <!-- <td><span>{{package.salePrice | number :'1.2-2'}}</span> AED</td> -->
+
+                                                    <td><button type="button" (click)="deleteVehicle(car)"
+                                                            class="btn btn-default btn-sm" title="Delete"><span
+                                                                class="sr-only">Delete</span>
+                                                            <i class="fa fa-trash"></i></button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <!-- <div class="col-lg-6">
+                                    <div class="position-relative form-group"><label for="exampleSelect"
+                                            class="">Skill</label>
+                                        <select name="select" id="exampleSelect" class="form-control">
+                                            <option>Battery replaement</option>
+                                            <option>Battery replaement</option>
+                                            <option>Battery replaement</option>
+                                            <option>Battery replaement</option>
+
+                                        </select>
+                                    </div>
+
+                                </div> -->
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col">
+                                <div class="text-right form-group">
+
+                                    <button id="cancelBtn" type="reset"
+                                        class="btn btn-outline-secondary mr-2">Cancel</button>
+
+
+
+                                    <button type="submit" class="btn btn-primary">Save Customer </button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-auto">
+                        <div class="vl"></div>
+                    </div>
+                    <div class="col-lg-4">
+                        <h5>Upload Customer Image</h5>
+                        <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                            <input id="upload" type="file" #myInput (change)="onImagePicked($event)"
+                                class="form-control border-0">
+                            <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose
+                                file</label>
+                            <div class="input-group-append">
+                                <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i
+                                        class="fa fa-cloud-upload mr-2 text-muted"></i><small
+                                        class="text-uppercase font-weight-bold text-muted">Choose
+                                        file</small></label>
+                            </div>
+                        </div>
+
+                        <div *ngIf="inValidImage ||  invalidType" class="small text-danger">
+                            <h6>Invalid Image</h6>
+                        </div>
+                        <!-- Uploaded image area-->
+                        <p class="font-italic text-center">The image uploaded will be rendered inside the box
+                            below.
+                        </p>
+                        <div class="image-area mt-4">
+                            <img *ngIf="!image" id="imageResult" src="#" alt=""
+                                class="img-fluid rounded shadow-sm mx-auto d-block">
+
+                            <img *ngIf="image" id="imageResult" [src]="imagePreview" alt=""
+                                class="img-fluid rounded shadow-sm mx-auto d-block" #myInput>
+                            <!-- <img *ngIf="!image" class="img-thumbnail rounded"
+                                src="assets/images/brand-placeholder.png" alt=""> -->
+                            <!-- <img *ngIf="image" class="img-thumbnail rounded" [src]="imagePreview" alt=""> -->
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+            </form>
+        </div>
+
+
+        <div class="row card mt-5">
+            <div class="col-lg-12">
+                <div class="card-body">
+                    <h3 class="card-title"> Customers List</h3>
+                    <table class="mb-0 table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th> Name</th>
+                                <th>Email Address</th>
+                                <th>Mobile</th>
+                                <th>Address</th>
+                                <th>State</th>
+                                <th>Image</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let user of allCustomers  | paginate: { itemsPerPage: itemPerPage, currentPage: page } ; let i=index">
+                                <th scope="row"> <span *ngIf="page==1">{{(i+1)}}</span>
+                                    <span *ngIf="page>1">{{((page-1)*itemPerPage)+(i+1)}}</span>
+                                </th>
+                                <td>
+                                    <a [routerLink]="['/dashboard/technician/detail', user._id]"
+                                        routerLinkActive="router-link-active">{{user.firstName}}
+                                        {{user.lastName}}</a>
+                                </td>
+                                <td>{{user.email}} </td>
+                                <td>{{user.contact}}</td>
+                                <td>{{user.address}}</td>
+                                <td>{{user.state}}</td>
+                                <td><img [src]="user.imageUrl != '' ? user.imageUrl : 'assets/images/avatars/av2.jpg'"
+                                        class="img-fluid rounded shadow-sm mx-auto d-block" alt=" user" width="40px">
+                                </td>
+                                <td>
+
+
+                                    <button type="button" (click)="editProfile(user._id)" title="Edit technician"
+                                        class="btn btn-circle btn-default btn-sm"><span class="sr-only">Edit</span><i
+                                            class="fa fa-pencil-alt"></i></button>
+
+                                    <button type="button" title="Delete" (click)="deleteTechnician(user._id)"
+                                        class="btn btn-circle btn-default btn-sm"><span class="sr-only">Delete</span><i
+                                            class="fa fa-trash"></i></button>
+                                </td>
+
+                            </tr>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

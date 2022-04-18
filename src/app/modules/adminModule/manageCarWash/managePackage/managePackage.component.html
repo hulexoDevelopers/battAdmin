@@ -1,0 +1,114 @@
+<div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div class="page-title-icon">
+                             <img src="assets/images/favicon2.png" alt="" width="36">
+                    </div>
+                    <div>BattMobile Dashboard
+                        <div class="page-title-subheading">This is an example dashboard created using
+                            build-in elements and components.
+                        </div>
+                    </div>
+                </div>
+                <div class="page-title-actions">
+
+                    <div class="d-inline-block ">
+                        <button type="button" (click)="Data.goBack()" aria-haspopup="true" aria-expanded="false"
+                            class="btn-shadow  btn btn-info">
+                            <span class="btn-icon-wrapper">
+                                <i class="pe-7s-angle-left fa-1x  fa-w-20"></i>
+                            </span>
+                            Back
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="add-brands card">
+            <div class="row">
+                <div class="col pt-3">
+                    <h2 class="card-title">Car Wash Packages</h2>
+                </div>
+            </div>
+
+            <div class="col-8">
+                <form [formGroup]="myForm" *ngIf="myForm">
+                    <div class="mb-4">
+    
+                        <div class="form-container">
+                            <table class="table table-bordered table-responsive w-100 d-block d-md-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <!-- <th>Id</th> -->
+                                        <th>Description</th>
+                                        <th>Bronze</th>
+                                        <th>Silver</th>
+                                        <th>Gold</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr formArrayName="packageItems"
+                                        *ngFor="let person of serverData; let personIndex = index">
+                                        <td [formGroupName]="personIndex">{{personIndex +1}}</td>
+                                        <!-- <td [formGroupName]="personIndex"> <input type="text" formControlName="id"
+                                                class="form-control" placeholder="please enter id" required />
+                                        </td> -->
+                                        <td [formGroupName]="personIndex"><input type="text" formControlName="title"
+                                                class="form-control" placeholder="Please Enter Description" required />
+                                        </td>
+                                        <td [formGroupName]="personIndex"> <input type="text" formControlName="bronze"
+                                                class="form-control" placeholder="Please Enter Bronze package Value"
+                                                required />
+                                        </td>
+                                        <td [formGroupName]="personIndex"><input type="number" formControlName="silver"
+                                                class="form-control" placeholder="Please Enter Silver package Value"
+                                                required /></td>
+                                        <td [formGroupName]="personIndex"><input type="number" formControlName="gold"
+                                                class="form-control" placeholder="Please Enter Gold package Value"
+                                                required /></td>
+                                        <td [formGroupName]="personIndex">
+                                            <span (click)="remove(person)" class="material-icons">
+                                                delete
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="float-right">
+                                        <button class="btn btn-rounded btn-elegant waves-effect waves-light"
+                                            (click)="addCreds()">Add New Row</button>
+                                        <button class="btn btn-rounded btn-grey waves-effect waves-light"
+                                            (click)="updatePackagePrice()">Save & Update</button>
+                                    </div>
+                                </div>
+                                <div [ngClass]="messageClass">
+                                    {{message}}
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-4">
+
+            </div>
+
+
+        
+        </div>
+
+
+
+    </div>
+</div>
+

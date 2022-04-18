@@ -1,0 +1,82 @@
+<div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div class="page-title-icon">
+                        <img src="assets/images/favicon2.png" alt="" width="36">
+                    </div>
+                    <div>BattMobile Dashboard
+                        <!-- <div class="page-title-subheading">This is an example dashboard created using
+                                build-in elements and components.
+                            </div> -->
+                    </div>
+                </div>
+                <div class="page-title-actions">
+
+                    <div class="d-inline-block ">
+                        <button type="button" (click)="data.goBack()" aria-haspopup="true" aria-expanded="false"
+                            class="btn-shadow  btn btn-info">
+                            <span class="btn-icon-wrapper">
+                                <i class="pe-7s-angle-left fa-1x  fa-w-20"></i>
+                            </span>
+                            Back
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row card mt-5">
+            <div class="col-lg-12">
+                <div class="card-body">
+                    <h3 class="card-title"> Technicians List</h3>
+                    <table class="mb-0 table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th> Name</th>
+                                <th>Jobs Assign</th>
+                                <th>Completed</th>
+                                <th>Rejected</th>
+                                <th>Processing</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let user of allTechnicians  | paginate: { itemsPerPage: itemPerPage, currentPage: page } ; let i=index">
+                                <th scope="row"> <span *ngIf="page==1">{{(i+1)}}</span>
+                                    <span *ngIf="page>1">{{((page-1)*itemPerPage)+(i+1)}}</span>
+                                </th>
+                                <td>
+                                    <a [routerLink]="['/dashboard/technician/detail', user._id]"
+                                        routerLinkActive="router-link-active">{{user.firstName}}
+                                        {{user.lastName}}</a>
+                                </td>
+                                <td>{{user.totalJobs}}</td>
+                                <td>{{user.totalCompleted}}</td>
+                                <td>{{user.totalRejected}}</td>
+                                <td>{{user.totalJobs - user.totalCompleted - user.totalRejected}}</td>
+                               
+
+
+                              
+
+                            </tr>
+
+
+
+                        </tbody>
+                    </table>
+                    <div class="pagination-block text-right"
+                        *ngIf="allTechnicians && allTechnicians.length > itemPerPage">
+                        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

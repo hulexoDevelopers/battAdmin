@@ -1,0 +1,137 @@
+<h3>Edit Profile</h3>
+
+<form class="" name="loginForm" (ngSubmit)="f.form.valid && updateUser()" #f="ngForm" novalidate *ngIf="isLoad">
+  <!--form group-->
+  <div class="row">
+    <div class="col-md-6">
+      <div class="position-relative form-group"><label for="exampleEmail" class="">First
+          Name</label><input [(ngModel)]="user.firstName" name="fName" #fName="ngModel" id="exampleEmail"
+          placeholder="Enter first name" type="text" class="form-control"
+          [ngClass]="{ 'is-invalid': f.submitted && fName.invalid }" required>
+
+        <div *ngIf="f.submitted && fName.invalid" class="invalid-feedback">
+          <div *ngIf="fName.errors.required">Please enter first name
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="position-relative form-group"><label for="exampleEmail" class="">Last
+          Name</label><input name="lName" placeholder="Enter last name" type="text" class="form-control"
+          [(ngModel)]="user.lastName" #lName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && lName.invalid }"
+          required>
+
+        <div *ngIf="f.submitted && lName.invalid" class="invalid-feedback">
+          <div *ngIf="lName.errors.required">Please enter last name
+          </div>
+        </div>
+      </div>
+
+
+      <div class="position-relative form-group"><label for="exampleEmail" class="">Mobile
+          No</label><input name="contact" placeholder="Enter mobile number" type="tel" class="form-control"
+          [(ngModel)]="user.contact" #contact="ngModel" [ngClass]="{ 'is-invalid': f.submitted && contact.invalid }"
+          required />
+        <div *ngIf="f.submitted && contact.invalid" class="invalid-feedback">
+          <div *ngIf="contact.errors.required">Contact is required</div>
+
+        </div>
+      </div>
+
+      <div class="position-relative form-group" *ngIf="user.role !='agent'"><label for="exampleEmail"
+          class="">Address</label><input name="address" placeholder="Address" type="text" class="form-control"
+          [(ngModel)]="user.address" #address="ngModel" [ngClass]="{ 'is-invalid': f.submitted && address.invalid }"
+          required>
+        <div *ngIf="f.submitted && address.invalid" class="invalid-feedback">
+          <div *ngIf="address.errors.required">Address is required</div>
+
+        </div>
+      </div>
+
+
+      <div class="position-relative form-group" *ngIf="user.role !='agent'"><label for="exampleSelect"
+          class="">Emirate</label>
+        <select name="select" id="exampleSelect" class="form-control" (change)="stateChange($event)" [(ngModel)]="state"
+          #stat="ngModel" [ngClass]="{ 'is-invalid': f.submitted && stat.invalid }" required>
+          <option [ngValue]="null">Select Emirate</option>
+          <option [value]="state" *ngFor="let state of allStates">{{state}}</option>
+
+        </select>
+        <div *ngIf="f.submitted && stat.invalid" class="invalid-feedback">
+          <div *ngIf="stat.errors.required">Emirate is required</div>
+
+        </div>
+      </div>
+      <div class="position-relative form-group" *ngIf="user.role =='agent'"><label for="exampleSelect"
+          class="">Location</label>
+        <select name="location" id="exampleSelect" class="form-control" (change)="user.data[0].agentLocation =  $event.target.value"
+          [(ngModel)]="agentLocation" #loc="ngModel" [ngClass]="{ 'is-invalid': f.submitted && loc.invalid }" required>
+          <option [ngValue]="null">Select Location</option>
+          <option value="Service Center">Service Center</option>
+          <option value="Call Center Karachi">Call Center Karachi</option>
+          <option value="Head office Al Quoz">Head office Al Quoz</option>
+          <!-- <option [value]="state" *ngFor="let state of allStates">{{state}}</option> -->
+
+        </select>
+        <div *ngIf="f.submitted && loc.invalid" class="invalid-feedback">
+          <div *ngIf="loc.errors.required">Location is required</div>
+
+        </div>
+      </div>
+
+
+      <div class="position-relative form-group" *ngIf="user.role =='agent'"><label for="exampleSelect" class="">Allow
+          Job
+          Allocatin</label>
+        <select name="job" id="exampleSelect" class="form-control" (change)="allowDispatch = $event.target.value"
+          [(ngModel)]="allowDispatch" #dis="ngModel" [ngClass]="{ 'is-invalid': f.submitted && dis.invalid }" required>
+          <!-- <option [ngValue]="null">Please Select</option> -->
+          <option value="yes">yes</option>
+          <option value="no">No</option>
+
+        </select>
+        <div *ngIf="f.submitted && dis.invalid" class="invalid-feedback">
+          <div *ngIf="dis.errors.required">Please Select</div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-6">
+
+      <div class="form-group">
+        <label>User Image</label>
+        <div class="p-0 mb-3 text-center">
+          <img *ngIf="!image" class="img-thumbnail rounded" src="assets/images/brand-placeholder.png" alt="">
+          <img *ngIf="image" class="img-thumbnail rounded" [src]="imagePreview" alt="">
+        </div>
+        <div class="input-group imgload">
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" #myInput id="inputGroupFile03"
+              (change)="onImagePicked($event)">
+            <label class="custom-file-label" for="inputGroupFile04">Upload
+              Image</label>
+          </div>
+        </div>
+        <div *ngIf="inValidImage ||  invalidType" class="small text-danger">
+          <h6>Invalid Image</h6>
+        </div>
+        <div class="small text-danger pt-4">
+          <ul>
+            <li>Maximum image size 1mb</li>
+            <li>Only .jpg .png image allowed</li>
+          </ul>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="text-right">
+    <button type="button" class="btn btn-secondary mx-1" (click)="onClose()">Cancel</button>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </div>
+</form>

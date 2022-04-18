@@ -1,0 +1,131 @@
+<div id="wrapper">
+
+    <app-header></app-header>
+
+    <app-sidebar></app-sidebar>
+
+    <div id="main-content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <div class="row clearfix">
+                    <div class="col-md-6 col-sm-12">
+                        <h1>Manage profile</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Wajabat</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Manage Profile</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-md-6 col-sm-12 text-right hidden-xs">
+                        
+                </div>
+            </div>
+
+
+
+
+            <div class="row clearfix mt-3">
+                <div class="col-md-6 col-sm-12 card">
+                    <div class="header">
+                        <h2>Update Personal Information</h2>
+                    </div>
+                    <div class="body">
+                        <form class="mt-4 mx-3 checkout-info" id="loginForm" name="loginForm"
+                        (ngSubmit)="f.form.valid && updateProfile()" #f="ngForm" novalidate>
+                        <div class="form-group">
+                            <label for="email" class="form-label">EMAIL ADDRES</label>
+                            <input class="form-control" id="email" name="email" type="text" (keyup)="lowerCase()"
+                                placeholder="email@myemail.com" [(ngModel)]="user.email" #email="ngModel"
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"  autofocus=""
+                                required>
+                        
+                            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                                <div *ngIf="email.errors.required">Email is required</div>
+                                <div *ngIf="email.errors.pattern">Invalid email</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input" class="form-label">First Name</label>
+                            <input class="form-control" id="fName" name="fName" type="text" placeholder="First Name"
+                                [(ngModel)]="user.firstName" #fName="ngModel"
+                                [ngClass]="{ 'is-invalid': f.submitted && fName.invalid }" required>
+                        
+                            <div *ngIf="f.submitted && fName.invalid" class="invalid-feedback">
+                                <div *ngIf="fName.errors.required">First Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input" class="form-label">Last Name</label>
+                            <input class="form-control" id="lName" name="lName" type="text" placeholder="Last Name"
+                                [(ngModel)]="user.lastName" #lName="ngModel"
+                                [ngClass]="{ 'is-invalid': f.submitted && lName.invalid }" required>
+                        
+                            <div *ngIf="f.submitted && lName.invalid" class="invalid-feedback">
+                                <div *ngIf="lName.errors.required">Last Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input" class="form-label">Contact</label>
+                            <input class="form-control" id="contact" name="contact" type="text" placeholder="Cotact"
+                                [(ngModel)]="user.contact" #contact="ngModel"
+                                [ngClass]="{ 'is-invalid': f.submitted && contact.invalid }" required>
+                        
+                            <div *ngIf="f.submitted && contact.invalid" class="invalid-feedback">
+                                <div *ngIf="cotact.errors.required">Contact is required</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Save</button>
+                        </div>
+                        </form>
+                    </div>
+                  
+                    
+                </div>
+                <div class="col-md-6 col-sm-12 card">
+                    <div class="header">
+                        <h2>Change Password</h2>
+                    </div>
+                    <div class="body">
+                      
+                        <form class="mt-4 mx-3 checkout-info" id="passForm" name="passwordForm"
+                        (ngSubmit)="f.form.valid && updateUserPassword()" #pf="ngForm" novalidate>
+                        <div class="form-group">
+                            <label for="password" class="form-label">Current Password</label>
+                            <input class="form-control" id="currpassword" name="password" type="password"
+                                placeholder="*******" [(ngModel)]="oldPassword" #op="ngModel"
+                                [ngClass]="{ 'is-invalid': pf.submitted && op.invalid }" required>
+                            <div *ngIf="pf.submitted && op.invalid" class="invalid-feedback">
+                                <div *ngIf="op.errors.required">Old password is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="form-label">New Password</label>
+                            <input class="form-control" id="newpassword" name="password" type="password"
+                                placeholder="*******" [(ngModel)]="newPassword" #np="ngModel"
+                                [ngClass]="{ 'is-invalid': pf.submitted && np.invalid }" required>
+                            <div *ngIf="pf.submitted && np.invalid" class="invalid-feedback">
+                                <div *ngIf="np.errors.required">New Password is required</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Update Password</button>
+                        </div>
+
+                    </form>
+                    </div>
+                  
+                    
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

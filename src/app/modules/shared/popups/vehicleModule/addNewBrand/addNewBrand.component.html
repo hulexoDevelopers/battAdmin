@@ -1,0 +1,54 @@
+<h3>Add New Vehicle Brand</h3>
+
+<form class="" name="loginForm" (ngSubmit)="f.form.valid && saveNewBrand()" #f="ngForm" novalidate>
+  <!--form group-->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Brand Title</label>
+        <input type="text" name="title" class="form-control" placeholder="Enter vehicle brand title"
+          [(ngModel)]="brand.title" #title="ngModel" [ngClass]="{ 'is-invalid': f.submitted && title.invalid }"
+          required>
+
+        <div *ngIf="f.submitted && title.invalid" class="invalid-feedback">
+          <div *ngIf="title.errors.required">Please enter title</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Brand Logo</label>
+
+        <div class="p-0 mb-3 text-center">
+          <img *ngIf="!image" class="img-thumbnail rounded" src="assets/images/brand-placeholder.png" alt="">
+          <img *ngIf="image" class="img-thumbnail rounded" [src]="imagePreview" alt="">
+        </div>
+        <div class="input-group imgload">
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" #myInput id="inputGroupFile03"
+              (change)="onImagePicked($event)">
+            <label class="custom-file-label" for="inputGroupFile04">Upload
+              Image</label>
+          </div>
+        </div>
+        <div *ngIf="inValidImage ||  invalidType" class="small text-danger">
+          <h6>Invalid Image</h6>
+        </div>
+        <div class="small text-danger pt-4">
+          <ul>
+            <li>Maximum image size 1mb</li>
+            <li>Only .jpg .png image allowed</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+  <div class="text-right">
+    <button type="button" class="btn btn-secondary mx-1" (click)="onClose()">Cancel</button>
+    <button type="submit" class="btn btn-primary" [disabled]="disabled">Save</button>
+  </div>
+</form>

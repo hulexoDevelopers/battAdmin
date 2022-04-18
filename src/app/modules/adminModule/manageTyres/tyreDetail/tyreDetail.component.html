@@ -1,0 +1,214 @@
+<div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div class="page-title-icon">
+                        <img src="assets/images/favicon2.png" alt="" width="36">
+                    </div>
+                    <div>BattMobile Dashboard
+                        <!-- <div class="page-title-subheading">This is an example dashboard created using build-in
+                                elements and components.
+                            </div> -->
+                    </div>
+                </div>
+                <div class="page-title-actions">
+
+                    <div class="d-inline-block ">
+                        <button type="button" (click)="data.goBack()" aria-haspopup="true" aria-expanded="false"
+                            class="btn-shadow  btn btn-info">
+                            <span class="btn-icon-wrapper">
+                                <i class="pe-7s-angle-left fa-1x  fa-w-20"></i>
+                            </span>
+                            Back
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-12 d-flex justify-content-end">
+                <button type="button" class="btn btn-danger " (click)="editTyre()">Edit</button>
+                <button type="button" class="btn btn-danger mx-1" (click)="updateStock()">Update Stock</button>
+            </div>
+        </div>
+
+        <div class="add-brands card" *ngIf="tyre">
+
+
+
+
+            <div class="row">
+                <div class="col pt-3">
+                    <h2 class="card-title">Tyre Details</h2>
+                </div>
+            </div>
+
+            <div class="row py-3">
+
+
+                <div class="col-lg-4 col-md-8 mb-2">
+                    <div class="user-img">
+                        <img [src]="tyre.imageUrl != '' ? tyre.imageUrl : 'assets/images/avatars/battery.jpg'"
+                            class="img-fluid" alt="battery">
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-12 mb-2">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <h6 class="font-weight-bold">Model</h6>
+                                </div>
+                                <div class="col-lg-9">
+                                    <h6 class="font-weight-normal"> {{tyre.title}}</h6>
+                                </div>
+                                <div class="col-lg-3">
+                                    <h6 class="font-weight-bold">Company</h6>
+                                </div>
+                                <div class="col-lg-9">
+                                    <h6 class="font-weight-normal">
+                                        {{tyre.company.title}}
+                                    </h6>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-lg-12 mb-2">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <h6 class="font-weight-bold">Description</h6>
+                                </div>
+                                <div class="col-lg-9">
+                                    <h6 class="">
+                                        {{tyre.detail}}</h6>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="col-lg-12 mb-2">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <h6 class="font-weight-bold mb-3">Price</h6>
+
+                                </div>
+                                <div class="col-lg-9">
+                                    <h6 class="d-block">
+                                        {{tyre.price | currency :'AED'}}
+                                    </h6>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-lg-12">
+                            <h5 class="font-weight-bold">Quantity</h5>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <h6 class="">Total</h6>
+                                    {{totalStock}}
+                                </div>
+                                <div class="col-lg-3">
+                                    <h6 class="">Assigned </h6>
+                                    {{totalAssign}}
+
+                                </div>
+                                <div class="col-lg-3">
+                                    <h6 class="">Un Assigned</h6>
+                                    {{totalStock - totalAssign}}
+
+                                </div>
+                                <div class="col-lg-3">
+                                    <h6 class="">Total Sale</h6>
+                                    {{totalSale}}
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="row card mt-5">
+                    <div class="col-lg-12">
+                        <div class="card-body">
+                            <h3 class="card-title"> Tyre Stock Detail</h3>
+                            <div class="table-responsive">
+                                <table class="mb-0 table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Stock Id</th>
+                                            <th>Quantity</th>
+                                            <th>Type</th>
+                                            <th>Date</th>
+                                            <th>Assigned</th>
+                                            <th>Un Assigned</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            *ngFor="let stock of tyre.stock  | paginate: { itemsPerPage: itemPerPage, currentPage: page } ; let i=index">
+                                            <td scope="row"><span *ngIf="page==1">{{(i+1)}}</span>
+                                                <span *ngIf="page>1">{{((page-1)*itemPerPage)+(i+1)}}</span>
+                                            </td>
+                                            <td>{{stock.stockId}} </td>
+                                            <td>{{stock.quantity}}</td>
+                                            <td>{{stock.type}}</td>
+                                            <td>{{stock.createdDate | date}}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary">
+                                                    {{stock.assign}}
+                                                </button>
+                                            </td>
+                                            <td>{{stock.quantity - stock.assign}}</td>
+
+                                            <td>
+                                                <button (click)="assignStock(stock)" [disabled]="checkValid(stock)"
+                                                    class="mb-2 mr-2 btn btn-primary">Assign
+                                                </button>
+                                                <button type="button" [disabled]="checkAllowEdit(stock)"
+                                                    class="mb-2 mr-2 btn btn-warning" (click)="editStock(stock)">Edit
+
+                                                </button>
+                                                <button type="button" (click)="deleteTyreStock(stock)"
+                                                    class="mb-2 mr-2 btn btn-danger"
+                                                    [disabled]="checkAllowEdit(stock)">Delete
+
+                                                </button>
+                                            </td>
+
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

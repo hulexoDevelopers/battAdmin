@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="row justify-content-center">
+
+                <div class="col-lg-6 col-12">
+
+                    <section class="cardsec">
+                        <div class="login-inner gap-0">
+                            <div class="logincard">
+                                <div class="cardbody">
+                                    <div class="img-logo text-center">
+                                        <img src="assets/images/bm-logo.png" class="img-fluid" alt="">
+                                    </div>
+
+                                    <h1>LOGIN TO CONTINUE</h1>
+
+                                    <form id="loginForm" class="mt-2 form-auth-small" name="loginForm" (ngSubmit)="f.form.valid && onLogin()" #f="ngForm" novalidate>
+                                        <p class="text-scarlet"></p>
+                                        <div class="form-group">
+                                            <label for="email" class="form-label">EMAIL ADDRES</label>
+                                            <input type="email" class="form-control round" (keyup)="emailChange()" id="signin-email" name="email" placeholder="Email" [(ngModel)]="user.email" #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+                                                autofocus="" required>
+                                            <i *ngIf="email.valid" class="fa fa-check"></i>
+                                            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                                                <div *ngIf="email.errors.required">Email is required</div>
+                                                <div *ngIf="email.errors.pattern">Invalid email</div>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password" class="form-label">PASSWORD</label>
+                                            <input type="password" class="form-control round" name="password" id="signin-password" value="thisisthepassword" placeholder="Password" [(ngModel)]="user.password" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" autofocus=""
+                                                required>
+                                            <i *ngIf="password.valid" class="fa fa-check"></i>
+                                            <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+                                                <div *ngIf="password.errors.required">Password is required</div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="forget-pass"> <a href="#">Forget your password?</a> </div> -->
+                                        <div class="actionbtns d-grid">
+                                            <button class="btn btn-primary shadow-none" type="submit">Sign
+                                                In</button>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
