@@ -420,12 +420,6 @@ export class addNewInquiryComponent implements OnInit {
   saveInquiry() {
     this.inquiry.userId = this.userInfoService.getAuthData();
     this.inquiry.personalInfo = this.user;
-    // let address = {
-    //   long: '',
-    //   lat: '',
-    //   address: this.user.address,
-    //   state: this.user.state
-    // }
     let data = {
       lat: this.latitude,
       long: this.longitude,
@@ -433,8 +427,6 @@ export class addNewInquiryComponent implements OnInit {
       isCustom: false,
     }
     this.inquiry.address = data;
-
-    // this.inquiry.address = this.address;
     if (this.inquiry.serviceType == 'Battery Change') {
       let serviceDetail = {
         serviceType: this.inquiry.serviceType,

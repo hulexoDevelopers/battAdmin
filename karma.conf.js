@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/wajabatApp'),
+      dir: require('path').join(__dirname, './coverage/battmobileApp'),
       subdir: '.',
       reporters: [
         { type: 'html' },

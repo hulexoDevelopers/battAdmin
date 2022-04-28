@@ -10,7 +10,7 @@ import { alert } from './modules/shared/services/sweetAlert.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Wajabat Dashboard';
+  title = 'battmobile Dashboard';
 
   isMain: boolean = false;
   routeload: boolean = false;

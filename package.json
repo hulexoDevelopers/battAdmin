@@ -1,5 +1,5 @@
 {
-  "name": "wajabat-app",
+  "name": "battmobile-app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -22,8 +22,6 @@
     "@angular/platform-browser": "~11.2.7",
     "@angular/platform-browser-dynamic": "~11.2.7",
     "@angular/router": "~11.2.7",
-    "@fullcalendar/angular": "^5.9.0",
-    "@fullcalendar/daygrid": "^5.9.0",
     "@material/data-table": "^11.0.0",
     "@types/geolib": "^2.0.23",
     "apexcharts": "^3.27.3",
