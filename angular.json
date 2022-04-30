@@ -37,9 +37,7 @@
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
-              "./src/assets/js/main.js",
-              "./node_modules/apexcharts/dist/apexcharts.min.js",
-              "./node_modules/pusher-js/dist/web/pusher.min.js"
+              "./src/assets/js/main.js"
             ]
           },
           "configurations": {
@@ -106,9 +104,7 @@
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
-              "./src/assets/js/main.js",
-              "./node_modules/apexcharts/dist/apexcharts.min.js",
-              "./node_modules/pusher-js/dist/web/pusher.min.js"
+              "./src/assets/js/main.js"
             ]
           }
         },

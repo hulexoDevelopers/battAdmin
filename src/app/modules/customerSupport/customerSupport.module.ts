@@ -8,21 +8,18 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
-import { NgApexchartsModule } from 'ng-apexcharts';
 @NgModule({
   declarations: [routedComponents],
   imports: [
     CommonModule,
     customerSupportRoutingModule,
     Ng2SearchPipeModule,
-    NgApexchartsModule,
     NgxDaterangepickerMd,
     NgxPaginationModule,
     SelectDropDownModule,
     SharedModule,
     CoreModule
   ],
-  providers: [],
-  // entryComponents: [allMealsCalendarComponent]
+  providers: []
 })
 export class customerSupportModule { }
