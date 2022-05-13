@@ -61,11 +61,11 @@ export class inquiryDetailComponent implements OnInit {
     public data: Data
 
   ) {
-    
+
     // this.getAllVehicles();
   }
 
-  
+
 
   loadInitalData() {
     this.allVehicles = this.resourceService.allVehicles;
@@ -235,10 +235,10 @@ export class inquiryDetailComponent implements OnInit {
   //   console.log('do check hit')
   // }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     // console.log('after check init')
     this.loadInitalData() //load initial data;
-  }	
+  }
 
   // viewWillEnter(){
   //   console.log('view will enter')
@@ -355,6 +355,7 @@ export class inquiryDetailComponent implements OnInit {
     }
 
     this.jobService.addNewJob(data).subscribe(res => {
+      console.log('res' + JSON.stringify(res))
       if (!res.success) {
         this.alert.responseAlert(res.message, 'error');
       } else {
@@ -367,9 +368,11 @@ export class inquiryDetailComponent implements OnInit {
           customerId: this.inqData.customerId,
           technicianId: techId,
           technicianName: this.getUserName(techId),
+          orderId: res.data,
           title: 'Job Assigned'
         }
 
+        console.log('notif data' + JSON.stringify(notifData));
         this.SocService.emit('assignJob', notifData);
         this.inquiryService.updateEnquiry(this.inqData._id, this.inqData).subscribe(res => {
           this.data.goBack();
