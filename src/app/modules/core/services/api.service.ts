@@ -5,7 +5,7 @@ import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { Router } from "@angular/router";
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ApiService {
     constructor(private http: HttpClient, private route: Router) { }
 

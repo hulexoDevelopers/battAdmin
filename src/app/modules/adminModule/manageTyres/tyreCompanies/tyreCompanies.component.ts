@@ -20,7 +20,7 @@ export class tyreCompaniesComponent implements OnInit {
 
   isDisabled: boolean = false;
   allcompanies;
-  itemPerPage = 5;
+  itemPerPage = 100;
   page = 1;
   constructor(
     private route: ActivatedRoute,

@@ -116,9 +116,8 @@
                             <td *ngIf="inq.inquiryFrom != 'Mobile App'">{{getUserName(inq.userId)}}</td>
                             <td *ngIf="inq.inquiryFrom == 'Mobile App'">Customer</td>
                             <td>
-                                <a [routerLink]="['/dashboard/customer/detail', inq.customerId]"
-                                    routerLinkActive="router-link-active">{{inq.personalInfo.firstName}}
-                                    {{inq.personalInfo.lastName}}</a>
+                                <a [routerLink]="['/dashboard/customer/detail', inq.userId]"
+                                    routerLinkActive="router-link-active">{{getUserName(inq.userId)}}</a>
                             </td>
                             <td>{{inq.serviceDetail[0].serviceType}} </td>
                             <td>{{inq.contactNo}}</td>

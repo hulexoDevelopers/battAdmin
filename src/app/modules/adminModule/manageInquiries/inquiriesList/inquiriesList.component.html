@@ -4,19 +4,16 @@
             <div class="page-title-wrapper">
                 <div class="page-title-heading">
                     <div class="page-title-icon">
-                             <img src="assets/images/favicon2.png" alt="" width="36">
+                        <img src="assets/images/favicon2.png" alt="" width="36">
                     </div>
                     <div>BattMobile Dashboard
-                        <!-- <div class="page-title-subheading">This is an example dashboard created using
-                                build-in elements and components.
-                            </div> -->
+
                     </div>
                 </div>
                 <div class="page-title-actions">
 
                     <div class="d-inline-block ">
-                        <button type="button" (click)="data.goBack()" aria-haspopup="true" aria-expanded="false"
-                            class="btn-shadow  btn btn-info">
+                        <button type="button" (click)="data.goBack()" aria-haspopup="true" aria-expanded="false" class="btn-shadow  btn btn-info">
                             <span class="btn-icon-wrapper">
                                 <i class="pe-7s-angle-left fa-1x  fa-w-20"></i>
                             </span>
@@ -44,27 +41,25 @@
                                 <th>Mobile</th>
                                 <th>Address</th>
                                 <th>Inquiry Status</th>
-                                <th>Order Status</th>
+                                <th class="text-right">Order Status</th>
 
                             </tr>
                         </thead>
                         <tbody>
-                            <tr
-                                *ngFor="let inq of allInquiries  | paginate: { itemsPerPage: itemPerPage, currentPage: page } ; let i=index">
+                            <tr *ngFor="let inq of allInquiries  | paginate: { itemsPerPage: itemPerPage, currentPage: page } ; let i=index">
                                 <th scope="row"> <span *ngIf="page==1">{{(i+1)}}</span>
                                     <span *ngIf="page>1">{{((page-1)*itemPerPage)+(i+1)}}</span>
                                 </th>
                                 <td>{{inq.inquiryId}}</td>
                                 <td>
-                                    <a [routerLink]="['/dashboard/customer/detail', inq.customerId]"
-                                        routerLinkActive="router-link-active">{{inq.personalInfo.firstName}}
+                                    <a [routerLink]="['/dashboard/customer/detail', inq.customerId]" routerLinkActive="router-link-active">{{inq.personalInfo.firstName}}
                                         {{inq.personalInfo.lastName}}</a>
                                 </td>
                                 <td>{{inq.serviceType}} </td>
                                 <td>{{inq.contactNo}}</td>
                                 <td>{{inq.address[0].address}}, {{inq.address[0].state}}</td>
                                 <td>{{inq.inquiryStatus}}</td>
-                                <td>{{inq.orderStatus}}</td>
+                                <td class="text-right">{{inq.orderStatus}}</td>
                                 <!-- 
 
                                 <td>

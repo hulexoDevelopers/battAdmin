@@ -75,7 +75,7 @@ export class editInquiryComponent implements OnInit {
   user = {} as User;
   allStates;
   offerServices = ['Battery Change', 'Car Wash', 'Oil Change', 'Tyre Change'];
-  inqStatus = ['Closed', 'Open', 'Non Business Call', 'Rejected']
+  inqStatus = ['Close', 'Open', 'Non Business Call', 'Rejected']
   vBrands;
   allVehicles;
   vehicles;

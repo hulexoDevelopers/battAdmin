@@ -15,8 +15,7 @@
                 <div class="page-title-actions">
 
                     <div class="d-inline-block ">
-                        <button type="button" (click)="data.goBack()" aria-haspopup="true" aria-expanded="false"
-                            class="btn-shadow  btn btn-info">
+                        <button type="button" (click)="data.goBack()" aria-haspopup="true" aria-expanded="false" class="btn-shadow  btn btn-info">
                             <span class="btn-icon-wrapper">
                                 <i class="pe-7s-angle-left fa-1x  fa-w-20"></i>
                             </span>
@@ -33,97 +32,93 @@
             <div class="col-lg-12">
                 <div class="card-body">
                     <h3 class="card-title">Vehicles List</h3>
-                    <table class="mb-0 table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <!-- <th>Company Logo</th> -->
-                                <th>Vehicle Brand</th>
-                                <th>Vehicle Model</th>
-                                <th>Vehicle Image</th>
-                                <th>Recommended Batteries</th>
-                                <th>Recommended Oils</th>
-                                <th>Recommended Tyres</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                *ngFor="let car of allVehicles  | paginate: { itemsPerPage: itemPerPage, currentPage: page } ; let i=index">
-                                <th scope="row"> <span *ngIf="page==1">{{(i+1)}}</span>
-                                    <span *ngIf="page>1">{{((page-1)*itemPerPage)+(i+1)}}</span>
-                                </th>
+                    <div class="table-responsive">
+                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <!-- <th>Company Logo</th> -->
+                                    <th>Vehicle Brand</th>
+                                    <th>Vehicle Model</th>
+                                    <th>Vehicle Image</th>
+                                    <th>Recom. Batteries</th>
+                                    <th>Recom. Oils</th>
+                                    <th>Recom. Tyres</th>
+                                    <th class="text-right">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let car of allVehicles  | paginate: { itemsPerPage: itemPerPage, currentPage: page } ; let i=index">
+                                    <th scope="row"> <span *ngIf="page==1">{{(i+1)}}</span>
+                                        <span *ngIf="page>1">{{((page-1)*itemPerPage)+(i+1)}}</span>
+                                    </th>
 
-                                <td><a *ngIf="car.brandId">{{findBrandName(car.brandId)}}</a>
-                                </td>
-                                <td>{{car.title}}</td>
-                                <td>
-                                    <img *ngIf="car.imageUrl == '--'" width="40" class="rounded-circle"
-                                        src="assets/images/avatars/battery logo.png" alt="">
-                                    <img *ngIf="car.imageUrl != ''" width="40" class="rounded-circle"
-                                        [src]="car.imageUrl" alt="">
-                                </td>
-                                <td>
-                                    <!-- <span *ngFor="let btry of car.batteries">{{findBatteryName(btry)}} </span> -->
-                                    <div *ngIf="car.batteries.length > 0">
-                                        <span *ngFor="let btry of car.batteries">
+                                    <td><a *ngIf="car.brandId">{{findBrandName(car.brandId)}}</a>
+                                    </td>
+                                    <td>{{car.title}}</td>
+                                    <td>
+                                        <img *ngIf="car.imageUrl == '--'" width="40" class="img-fluid" src="assets/images/avatars/battery logo.png" alt="">
+                                        <img *ngIf="car.imageUrl != ''" width="40" class="img-fluid" [src]="car.imageUrl" alt="">
+                                    </td>
+                                    <td>
+                                        <!-- <span *ngFor="let btry of car.batteries">{{findBatteryName(btry)}} </span> -->
+                                        <div *ngIf="car.batteries.length > 0">
+                                            <span *ngFor="let btry of car.batteries">
                                             <a [routerLink]="['/dashboard/battery/detail', btry]"
                                                 routerLinkActive="router-link-active"
                                                 *ngIf="findBatteryName(btry) != '--'">{{findBatteryName(btry)}}</a>
                                             <i *ngIf="findBatteryName(btry) === '--'">{{findBatteryName(btry)}}</i>
                                         </span>
-                                    </div>
-                                    <div *ngIf="car.batteries.length == 0">
-                                        <span>Not Assigned </span>
-                                    </div>
-                                </td>
+                                        </div>
+                                        <div *ngIf="car.batteries.length == 0">
+                                            <span>Not Assigned </span>
+                                        </div>
+                                    </td>
 
-                                <td>
-                                    <div *ngIf="car.oils.length > 0">
-                                        <span *ngFor="let item of car.oils">
+                                    <td>
+                                        <div *ngIf="car.oils.length > 0">
+                                            <span *ngFor="let item of car.oils">
                                             <a [routerLink]="['/dashboard/oils/detail', item]"
                                                 routerLinkActive="router-link-active" *ngIf="findOilName(item) != '--'">
                                                 {{findOilName(item)}} </a>
                                             <i *ngIf="findOilName(item) === '--'"> {{findOilName(item)}} </i>
                                         </span>
-                                    </div>
-                                    <div *ngIf="car.oils.length == 0">
-                                        <span>Not Assigned </span>
-                                    </div>
+                                        </div>
+                                        <div *ngIf="car.oils.length == 0">
+                                            <span>Not Assigned </span>
+                                        </div>
 
-                                </td>
+                                    </td>
 
-                                <td>
-                                    <div *ngIf="car.tyres.length > 0">
-                                        <span *ngFor="let item of car.tyres">
+                                    <td>
+                                        <div *ngIf="car.tyres.length > 0">
+                                            <span *ngFor="let item of car.tyres">
                                             <a [routerLink]="['/dashboard/tyres/detail', item]"
                                                 routerLinkActive="router-link-active"
                                                 *ngIf="findTyreName(item) != '--'">
                                                 {{findTyreName(item)}} </a>
                                             <i *ngIf="findTyreName(item) === '--'"> {{findTyreName(item)}} </i>
                                         </span>
-                                    </div>
-                                    <div *ngIf="car.tyres.length == 0">
-                                        <span>Not Assigned </span>
-                                    </div>
+                                        </div>
+                                        <div *ngIf="car.tyres.length == 0">
+                                            <span>Not Assigned </span>
+                                        </div>
 
-                                </td>
-                                <td>
-
-                                    <button type="button" (click)="editVehicle(car._id)" title="Edit Model"
-                                        class="btn btn-circle btn-default btn-sm"><span class="sr-only">Edit</span><i
+                                    </td>
+                                    <td>
+                                        <div class="btnblock pull-right">
+                                            <button type="button" (click)="editVehicle(car._id)" title="Edit Model" class="btn btn-circle btn-default btn-sm"><span class="sr-only">Edit</span><i
                                             class="fa fa-pencil-alt"></i></button>
 
-                                    <button type="button" title="Delete" (click)="deleteVehicle(car._id)"
-                                        class="btn btn-circle btn-default btn-sm"><span class="sr-only">Delete</span><i
+                                            <button type="button" title="Delete" (click)="deleteVehicle(car._id)" class="btn btn-circle btn-default btn-sm"><span class="sr-only">Delete</span><i
                                             class="fa fa-trash"></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div class="pagination-block text-right mt-2"
-                        *ngIf="allVehicles && allVehicles.length > itemPerPage">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination-block text-center mt-3 mb-4" *ngIf="allVehicles && allVehicles.length > itemPerPage">
                         <pagination-controls (pageChange)="page = $event"></pagination-controls>
                     </div>
                 </div>

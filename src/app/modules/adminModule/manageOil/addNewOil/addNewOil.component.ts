@@ -43,7 +43,7 @@ export class addNewOilComponent implements OnInit {
   editImage: boolean = false;
   disabled: boolean = false;
 
-  itemPerPage = 5;
+  itemPerPage = 25;
   page = 1;
 
   isLoad: boolean = false;

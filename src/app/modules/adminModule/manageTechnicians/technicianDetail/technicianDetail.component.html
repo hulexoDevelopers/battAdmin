@@ -225,30 +225,32 @@
             <div class="col-md-12">
 
 
+                <form name="form" (ngSubmit)="f.form.valid && updatePassword()" #f="ngForm" novalidate>
+                    <section class="section">
 
-                <section class="section">
+                        <div class="card py-3 px-4">
+                            <h3 class="card-title">Change Password</h3>
 
-                    <div class="card py-3 px-4">
-                        <h3 class="card-title">Change Password</h3>
-
-                        <div class="form-group"><label for="exampleEmail" class="">New
-                                Password</label><input name="Password" id="exampleEmail" placeholder="New Password"
-                                type="email" class="form-control"></div>
+                            <div class="form-group"><label for="exampleEmail" class="">New
+                                    Password</label><input name="Password" id="exampleEmail" placeholder="New Password"
+                                    [(ngModel)]="password" type="text" class="form-control"></div>
 
 
-                        <div class="form-group"><label for="exampleEmail" class="">Confirm
-                                New
-                                Password</label><input name="Password" id="exampleEmail"
-                                placeholder="Confirm New Password" type="email" class="form-control"></div>
+                            <div class="form-group"><label for="exampleEmail" class="">Confirm
+                                    New
+                                    Password</label><input name="cPassword" id="exampleEmail"
+                                    placeholder="Confirm New Password" type="text" class="form-control"
+                                    [(ngModel)]="confirmPassword"></div>
 
-                        <div class="form-group">
-                            <button disabled class="mb-2 mr-2 btn btn-primary mt-1">Update Password
-                            </button>
-                            <button disabled type="button" class="btn btn-outline-secondary ">Cancel</button>
+                            <div class="form-group">
+                                <button type="submit" class="mb-2 mr-2 btn btn-primary mt-1">Update Password
+                                </button>
+                                <button disabled type="button" class="btn btn-outline-secondary ">Cancel</button>
+                            </div>
                         </div>
-                    </div>
 
-                </section>
+                    </section>
+                </form>
 
             </div>
         </div>

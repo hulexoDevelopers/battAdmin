@@ -19,7 +19,7 @@ import { editOilStockComponent } from 'src/app/modules/shared/popups/oilModule/e
 export class oilDetailComponent implements OnInit {
 
   isDisabled: boolean = false;
-  itemPerPage = 5;
+  itemPerPage = 25;
   page = 1;
 
   oilId: string;

@@ -22,7 +22,7 @@ export class adminPanelComponent implements OnInit {
   totalCustomers = 0;
   allInquiries;
 
-  itemPerPage = 25;
+  itemPerPage = 50;
   page = 1;
   constructor(
     private route: ActivatedRoute,
@@ -40,7 +40,7 @@ export class adminPanelComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAllInquiries();
+
     this.getAllUsers();
     this.SocService.on('newInquiryRcvd').subscribe(res => {
       this.getAllInquiries();
@@ -63,9 +63,30 @@ export class adminPanelComponent implements OnInit {
   }
 
 
+  allUsers;
+  getUsers() {
+    this.userService.getAllUsers().subscribe(res => {
+
+
+    })
+
+  }
+
+
+  getUserName(id: string) {
+    const user = this.allUsers.find(data => data._id == id);
+    if (user) {
+      return user.firstName + ' ' + user.lastName
+    } else {
+      return 'Na'
+    }
+  }
+
   getAllUsers() {
     this.userService.getAllUsers().subscribe(res => {
       if (res.data.length > 0) {
+        this.allUsers = res.data;
+        this.getAllInquiries();
         let users = res.data.filter(data => data.role == 'customer');
         if (users.length) {
           this.totalCustomers = users.length;

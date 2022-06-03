@@ -10293,9 +10293,9 @@ button,
 }
 
 .app-header__logo .logo-src {
-    height: 43px;
-    width: 311px;
-    background: url(../images/logo-inverse.png) left center no-repeat;
+    height: 40px;
+    width: 190px;
+    background: url(../images/bm-logo.png) left center no-repeat;
     background-size: contain
 }
 

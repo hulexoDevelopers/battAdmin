@@ -15,8 +15,7 @@
                 <div class="page-title-actions">
 
                     <div class="d-inline-block ">
-                        <button type="button" (click)="data.goBack()" aria-haspopup="true" aria-expanded="false"
-                            class="btn-shadow  btn btn-info">
+                        <button type="button" (click)="data.goBack()" aria-haspopup="true" aria-expanded="false" class="btn-shadow  btn btn-info">
                             <span class="btn-icon-wrapper">
                                 <i class="pe-7s-angle-left fa-1x  fa-w-20"></i>
                             </span>
@@ -36,9 +35,6 @@
 
         <div class="add-brands card" *ngIf="tyre">
 
-
-
-
             <div class="row">
                 <div class="col pt-3">
                     <h2 class="card-title">Tyre Details</h2>
@@ -47,11 +43,9 @@
 
             <div class="row py-3">
 
-
                 <div class="col-lg-4 col-md-8 mb-2">
                     <div class="user-img">
-                        <img [src]="tyre.imageUrl != '' ? tyre.imageUrl : 'assets/images/avatars/battery.jpg'"
-                            class="img-fluid" alt="battery">
+                        <img [src]="tyre.imageUrl != '' ? tyre.imageUrl : 'assets/images/brand-placeholder.png'" class="img-fluid" alt="tyre">
                     </div>
                 </div>
 
@@ -166,8 +160,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr
-                                            *ngFor="let stock of tyre.stock  | paginate: { itemsPerPage: itemPerPage, currentPage: page } ; let i=index">
+                                        <tr *ngFor="let stock of tyre.stock  | paginate: { itemsPerPage: itemPerPage, currentPage: page } ; let i=index">
                                             <td scope="row"><span *ngIf="page==1">{{(i+1)}}</span>
                                                 <span *ngIf="page>1">{{((page-1)*itemPerPage)+(i+1)}}</span>
                                             </td>
@@ -176,24 +169,19 @@
                                             <td>{{stock.type}}</td>
                                             <td>{{stock.createdDate | date}}</td>
                                             <td>
-                                                <button type="button" class="btn btn-primary">
+                                                <h4><span class="badge rounded-pill text-white bg-warning">
                                                     {{stock.assign}}
-                                                </button>
+                                                </span>
+                                                </h4>
                                             </td>
                                             <td>{{stock.quantity - stock.assign}}</td>
 
-                                            <td>
-                                                <button (click)="assignStock(stock)" [disabled]="checkValid(stock)"
-                                                    class="mb-2 mr-2 btn btn-primary">Assign
+                                            <td class="text-right">
+                                                <button (click)="assignStock(stock)" [disabled]="checkValid(stock)" class="mb-2 mr-2 btn btn-primary">Assign
                                                 </button>
-                                                <button type="button" [disabled]="checkAllowEdit(stock)"
-                                                    class="mb-2 mr-2 btn btn-warning" (click)="editStock(stock)">Edit
-
+                                                <button type="button" [disabled]="checkAllowEdit(stock)" class="mb-2 mr-2 btn btn-warning" (click)="editStock(stock)">Edit
                                                 </button>
-                                                <button type="button" (click)="deleteTyreStock(stock)"
-                                                    class="mb-2 mr-2 btn btn-danger"
-                                                    [disabled]="checkAllowEdit(stock)">Delete
-
+                                                <button type="button" (click)="deleteTyreStock(stock)" class="mb-2 mr-2 btn btn-danger" [disabled]="checkAllowEdit(stock)">Delete
                                                 </button>
                                             </td>
 

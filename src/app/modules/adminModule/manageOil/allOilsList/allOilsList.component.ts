@@ -17,7 +17,7 @@ import { editOilComponent } from './../../../shared/popups/oilModule/editOil/edi
 
 export class allOilsListComponent implements OnInit {
 
-  itemPerPage = 5;
+  itemPerPage = 100;
   page = 1;
   allOils;
   isLoad: boolean = false;

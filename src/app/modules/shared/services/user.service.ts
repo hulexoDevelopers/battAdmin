@@ -64,7 +64,7 @@ export class userService {
       );
   }
 
-  
+
   //get user by contact 
   getTechniciansWithActiveJobs() {
     return this._api.get(`${"users/techniciansWithActiveJobs"}`)
@@ -121,6 +121,18 @@ export class userService {
   //reset password
   resetPassword(data) {
     return this._api.post(`${"users/resetPassword"}`, data)
+      .pipe(
+        map((res: any) => res),
+        catchError((error: any) => Observable.throw(error))
+      )
+  }
+
+
+
+
+  //reset password
+  changeTechPassword(data) {
+    return this._api.post(`${"users/changeTechnicianPassword"}`, data)
       .pipe(
         map((res: any) => res),
         catchError((error: any) => Observable.throw(error))

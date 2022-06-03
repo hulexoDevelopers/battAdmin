@@ -30,7 +30,7 @@
 
 
       <div class="position-relative form-group"><label for="exampleEmail" class="">Mobile
-          No</label><input name="contact" placeholder="Enter mobile number" type="tel" class="form-control"
+          No</label><input name="contact" placeholder="Enter mobile number" type="tel" class="form-control" disabled
           [(ngModel)]="user.contact" #contact="ngModel" [ngClass]="{ 'is-invalid': f.submitted && contact.invalid }"
           required />
         <div *ngIf="f.submitted && contact.invalid" class="invalid-feedback">

@@ -40,6 +40,10 @@ export class inquiryDetailComponent implements OnInit {
   availableTyreStock;
   availableOilStock;
 
+
+  inquiryVehicle;
+
+  customer;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -113,6 +117,7 @@ export class inquiryDetailComponent implements OnInit {
   getEnquiryDetail(id: string) {
     this.inquiryService.getEnquiryById(id).subscribe(res => {
       this.inqData = res.data;
+      this.getCustomerData(res.data.customerId)
       this.sortTechArray();
       if (this.inqData.serviceDetail[0].serviceType == 'Battery Change' && this.inqData.serviceDetail[0].isBattery) {
         this.getBatteryById(this.inqData.serviceDetail[0].battery)
@@ -125,6 +130,7 @@ export class inquiryDetailComponent implements OnInit {
       if (this.inqData.serviceDetail[0].serviceType == 'Oil Change' && this.inqData.serviceDetail[0].isOil) {
         this.getOilById(this.inqData.serviceDetail[0].oil)
       }
+     
     })
   }
 
@@ -260,8 +266,20 @@ export class inquiryDetailComponent implements OnInit {
     let userId = this.UserInfoService.getAuthData();
     this.userService.getUserById(userId).subscribe(res => {
       this.userData = res.data
+
     })
   }
+
+
+  //get customer 
+  getCustomerData(id) {
+    this.userService.getUserById(id).subscribe(res => {
+      this.customer = res.data
+      this.inquiryVehicle = this.customer.vehicles.find(data => data.vehicleId == this.inqData.vehicleDetail[0])
+     
+    })
+  }
+
 
   batteryData;
   //get battery by id
@@ -290,6 +308,9 @@ export class inquiryDetailComponent implements OnInit {
       this.getOilAvaialbeAssignStock(id);
     })
   }
+
+
+
 
 
 

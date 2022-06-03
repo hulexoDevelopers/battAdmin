@@ -18,7 +18,7 @@
                                     <form id="loginForm" class="mt-2 form-auth-small" name="loginForm" (ngSubmit)="f.form.valid && onLogin()" #f="ngForm" novalidate>
                                         <p class="text-scarlet"></p>
                                         <div class="form-group">
-                                            <label for="email" class="form-label">EMAIL ADDRES</label>
+                                            <label for="email" class="form-label">EMAIL ADDRESS</label>
                                             <input type="email" class="form-control round" (keyup)="emailChange()" id="signin-email" name="email" placeholder="Email" [(ngModel)]="user.email" #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
                                                 autofocus="" required>
                                             <i *ngIf="email.valid" class="fa fa-check"></i>

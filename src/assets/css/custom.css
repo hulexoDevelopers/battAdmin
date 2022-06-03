@@ -157,7 +157,7 @@ a {
 }
 
 .add-brands .plus-icon {
-    margin-top: 31px;
+    margin-top: 11px;
 }
 
 .vl {
@@ -347,4 +347,8 @@ ngx-select-dropdown {
     margin-bottom: 15px;
     width: 100%;
     object-fit: cover;
+}
+
+.btnblock {
+    width: 75px;
 }

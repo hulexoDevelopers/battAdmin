@@ -21,7 +21,7 @@ import { editTyreStockComponent } from 'src/app/modules/shared/popups/tyreModule
 export class tyreDetailComponent implements OnInit {
 
   isDisabled: boolean = false;
-  itemPerPage = 5;
+  itemPerPage = 25;
   page = 1;
 
   tyreId: string;

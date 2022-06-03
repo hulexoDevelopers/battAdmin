@@ -17,8 +17,7 @@
 
                     <div class="d-inline-block ">
 
-                        <button type="button" (click)="data.goBack()" aria-haspopup="true" aria-expanded="false"
-                            class="btn-shadow  btn btn-info">
+                        <button type="button" (click)="data.goBack()" aria-haspopup="true" aria-expanded="false" class="btn-shadow  btn btn-info">
                             <span class="btn-icon-wrapper">
                                 <i class="pe-7s-angle-left fa-1x  fa-w-20"></i>
 
@@ -33,59 +32,46 @@
             </div>
         </div>
         <div class="add-brands card">
-            <div class="row">
-                <div class="col pt-3">
-                    <h2 class="card-title">Add New Oil</h2>
-                </div>
-            </div>
+
             <form name="form" (ngSubmit)="f.form.valid && saveNewOil()" #f="ngForm" novalidate>
                 <div class="row mt-3">
 
-                    <div class="col-7">
+                    <div class="col-lg-5">
                         <div class="row">
-                            <div class="col-lg-12">
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <div class="position-relative form-group"><label for="exampleSelect"
-                                                class="">Oil Brand</label>
-                                            <ngx-select-dropdown [(ngModel)]="company" name="companyName"
-                                                [multiple]="false" (change)="companyChange($event)"
-                                                [config]="companyConfig" [options]="allCompanies" #companyId="ngModel"
-                                                [ngClass]="{'is-invalid': f.submitted && companyId.invalid }" required>
+                            <div class="col pt-3">
+                                <h2 class="card-title">Add New Oil</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="position-relative form-group"><label for="exampleSelect" class="">Oil Brand</label>
+                                    <ngx-select-dropdown [(ngModel)]="company" name="companyName" [multiple]="false" (change)="companyChange($event)" [config]="companyConfig" [options]="allCompanies" #companyId="ngModel" [ngClass]="{'is-invalid': f.submitted && companyId.invalid }" required>
 
-                                            </ngx-select-dropdown>
+                                    </ngx-select-dropdown>
 
-                                            <div *ngIf="!isCompany && f.submitted" class="validation-error">
-                                                <div>Brand is required</div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                    <div class="col-lg-4 plus-icon">
-
-                                        <button type="button" class="btn mr-2 mb-2 btn-primary"
-                                            (click)="addNewcompany()">
-                                            <i class="fas fa-plus fa-1x"></i> Add New Brand
-                                        </button>
-
-
+                                    <div *ngIf="!isCompany && f.submitted" class="validation-error">
+                                        <div>Brand is required</div>
                                     </div>
                                 </div>
 
+
                             </div>
+                            <div class="col-lg-6 plus-icon">
+
+                                <button type="button" class="btn mr-2 mb-2 btn-primary" (click)="addNewcompany()">
+                                <i class="fas fa-plus fa-1x"></i> Add New Brand
+                            </button>
 
 
+                            </div>
                         </div>
 
                         <div class="row">
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="position-relative form-group">
                                     <label for="exampleEmail" class=""> Oil Title</label>
-                                    <input name="model" type="text" [(ngModel)]="oil.title" id="exampleEmail"
-                                        placeholder="title" class="form-control" #bTitle="ngModel"
-                                        [ngClass]="{ 'is-invalid': f.submitted && bTitle.invalid }" required>
+                                    <input name="model" type="text" [(ngModel)]="oil.title" id="exampleEmail" placeholder="Title" class="form-control" #bTitle="ngModel" [ngClass]="{ 'is-invalid': f.submitted && bTitle.invalid }" required>
                                     <div *ngIf="f.submitted && bTitle.invalid" class="invalid-feedback">
                                         <div *ngIf="bTitle.errors.required">Please enter title
                                         </div>
@@ -93,25 +79,18 @@
 
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="position-relative form-group"><label for="exampleEmail" class="">Price
-                                        (AED)</label><input name="price" type="number" id="exampleEmail"
-                                        [(ngModel)]="oil.price" placeholder="000" class="form-control"
-                                        #bPrice="ngModel" [ngClass]="{ 'is-invalid': f.submitted && bPrice.invalid }"
-                                        required>
+                                        (AED)</label><input name="price" type="number" id="exampleEmail" [(ngModel)]="oil.price" placeholder="000" class="form-control" #bPrice="ngModel" [ngClass]="{ 'is-invalid': f.submitted && bPrice.invalid }" required>
                                     <div *ngIf="f.submitted && bPrice.invalid" class="invalid-feedback">
                                         <div *ngIf="bPrice.errors.required">Please enter price
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-2">
-                                <div class="position-relative form-group"><label for="exampleEmail"
-                                        class="">Quantity</label><input name="quantity" type="number"
-                                        [(ngModel)]="oil.quantity" #bQuantity="ngModel" id="exampleEmail"
-                                        placeholder="quantity"
-                                        [ngClass]="{ 'is-invalid': f.submitted && bQuantity.invalid }" required
-                                        class="form-control">
+                            <div class="col-lg-6">
+                                <div class="position-relative form-group"><label for="exampleEmail" class="">Quantity</label><input name="quantity" type="number" [(ngModel)]="oil.quantity" #bQuantity="ngModel" id="exampleEmail" placeholder="Quantity" [ngClass]="{ 'is-invalid': f.submitted && bQuantity.invalid }"
+                                        required class="form-control">
                                     <div *ngIf="f.submitted && bQuantity.invalid" class="invalid-feedback">
                                         <div *ngIf="bQuantity.errors.required">Please enter quantity
                                         </div>
@@ -119,10 +98,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <div class="position-relative form-group"><label for="exampleText"
-                                        class="">Description</label><textarea name="detail" id="exampleText"
-                                        class="form-control" [(ngModel)]="oil.detail" #bDetail="ngModel"
-                                        [ngClass]="{ 'is-invalid': f.submitted && bDetail.invalid }"
+                                <div class="position-relative form-group"><label for="exampleText" class="">Description</label><textarea name="detail" id="exampleText" class="form-control" [(ngModel)]="oil.detail" #bDetail="ngModel" [ngClass]="{ 'is-invalid': f.submitted && bDetail.invalid }"
                                         required></textarea>
                                     <div *ngIf="f.submitted && bDetail.invalid" class="invalid-feedback">
                                         <div *ngIf="bDetail.errors.required">Please enter detail
@@ -131,15 +107,43 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-12">
+                                <h5>Upload Battery Model Image</h5>
+                                <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                    <input id="upload" type="file" #myInput (change)="onImagePicked($event)" class="form-control border-0">
+                                    <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose
+            file</label>
+                                    <div class="input-group-append">
+                                        <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i
+                    class="fa fa-cloud-upload mr-2 text-muted"></i><small
+                    class="text-uppercase font-weight-bold text-muted">Choose
+                    file</small></label>
+                                    </div>
+                                </div>
 
+                                <div *ngIf="inValidImage ||  invalidType" class="small text-danger">
+                                    <h6>Invalid Image</h6>
+                                </div>
+                                <!-- Uploaded image area-->
+                                <p class="font-italic text-center">The image uploaded will be rendered inside the box below.
+                                </p>
+                                <div class="image-area mt-4">
+                                    <img *ngIf="!image" id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+
+                                    <img *ngIf="image" id="imageResult" [src]="imagePreview" alt="" class="img-fluid rounded shadow-sm mx-auto d-block" #myInput>
+                                    <!-- <img *ngIf="!image" class="img-thumbnail rounded"
+                                    src="assets/images/brand-placeholder.png" alt=""> -->
+                                    <!-- <img *ngIf="image" class="img-thumbnail rounded" [src]="imagePreview" alt=""> -->
+                                </div>
+
+                            </div>
+                        </div>
                         <div class="row mt-3">
                             <div class="col">
                                 <div class="text-right form-group">
 
-                                    <button id="cancelBtn" type="reset"
-                                        class="btn btn-outline-secondary mr-2">Cancel</button>
-
-
+                                    <button id="cancelBtn" type="reset" class="btn btn-outline-secondary mr-2">Cancel</button>
 
                                     <button [disabled]="disabled" type="submit" class="btn btn-primary">Save</button>
 
@@ -150,55 +154,8 @@
 
                     </div>
 
-                    <div class="col-auto">
-                        <div class="vl"></div>
-                    </div>
-                    <div class="col-lg-4">
-                        <h5>Upload Battery Model Image</h5>
-                        <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                            <input id="upload" type="file" #myInput (change)="onImagePicked($event)"
-                                class="form-control border-0">
-                            <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose
-                                file</label>
-                            <div class="input-group-append">
-                                <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i
-                                        class="fa fa-cloud-upload mr-2 text-muted"></i><small
-                                        class="text-uppercase font-weight-bold text-muted">Choose
-                                        file</small></label>
-                            </div>
-                        </div>
-
-                        <div *ngIf="inValidImage ||  invalidType" class="small text-danger">
-                            <h6>Invalid Image</h6>
-                        </div>
-                        <!-- Uploaded image area-->
-                        <p class="font-italic text-center">The image uploaded will be rendered inside the box below.
-                        </p>
-                        <div class="image-area mt-4">
-                            <img *ngIf="!image" id="imageResult" src="#" alt=""
-                                class="img-fluid rounded shadow-sm mx-auto d-block">
-
-                            <img *ngIf="image" id="imageResult" [src]="imagePreview" alt=""
-                                class="img-fluid rounded shadow-sm mx-auto d-block" #myInput>
-                            <!-- <img *ngIf="!image" class="img-thumbnail rounded"
-                                    src="assets/images/brand-placeholder.png" alt=""> -->
-                            <!-- <img *ngIf="image" class="img-thumbnail rounded" [src]="imagePreview" alt=""> -->
-                        </div>
-
-                    </div>
-
-
-
-
-                </div>
-            </form>
-        </div>
-
-        <section class="card mt-5">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card-body">
-                        <h3 class="card-title">Oil List</h3>
+                    <div class="col-lg-7">
+                        <h3 class="card-title pt-3">Oil List</h3>
                         <table class="mb-0 table">
                             <thead>
                                 <tr>
@@ -206,12 +163,11 @@
                                     <th>Model </th>
                                     <th>Company</th>
                                     <th>Logo</th>
-                                    <th>Action</th>
+                                    <th class="text-right">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr
-                                    *ngFor="let item of allOils  | paginate: { itemsPerPage: itemPerPage, currentPage: page } ; let i=index">
+                                <tr *ngFor="let item of allOils  | paginate: { itemsPerPage: itemPerPage, currentPage: page } ; let i=index">
                                     <th scope="row"> <span *ngIf="page==1">{{(i+1)}}</span>
                                         <span *ngIf="page>1">{{((page-1)*itemPerPage)+(i+1)}}</span>
                                     </th>
@@ -219,37 +175,34 @@
                                     <td><a [routerLink]="['/dashboard/oils/detail', item._id]">{{item.title}}</a> </td>
                                     <td>{{item.company.title}}</td>
                                     <td>
-                                        <img *ngIf="item.imageUrl == '--'" width="40" class="rounded-circle"
-                                            src="assets/images/avatars/battery logo.png" alt="">
-                                        <img *ngIf="item.imageUrl != ''" width="40" class="rounded-circle"
-                                            [src]="item.imageUrl" alt="">
+                                        <img *ngIf="item.imageUrl == '--'" width="40" class="img-fluid" src="assets/images/avatars/battery logo.png" alt="">
+                                        <img *ngIf="item.imageUrl != ''" width="40" class="img-fluid" [src]="item.imageUrl" alt="">
                                     </td>
 
 
                                     <td>
 
+                                        <div class="btnblock pull-right">
+                                            <button type="button" (click)="editOil(item._id)" title="Edit battery" class="btn btn-circle btn-default btn-sm"><span class="sr-only">Edit</span><i
+                                                class="fa fa-pencil-alt"></i></button>
 
-                                        <button type="button" (click)="editOil(item._id)" title="Edit battery"
-                                            class="btn btn-circle btn-default btn-sm"><span
-                                                class="sr-only">Edit</span><i class="fa fa-pencil-alt"></i></button>
-
-                                        <button type="button" title="Delete" (click)="deleteOil(item._id)"
-                                            class="btn btn-circle btn-default btn-sm"><span
-                                                class="sr-only">Delete</span><i class="fa fa-trash"></i></button>
+                                            <button type="button" title="Delete" (click)="deleteOil(item._id)" class="btn btn-circle btn-default btn-sm"><span class="sr-only">Delete</span><i
+                                                class="fa fa-trash"></i></button>
+                                        </div>
                                     </td>
 
                                 </tr>
 
-
-
                             </tbody>
                         </table>
-                        <div class="pagination-block text-right" *ngIf="allOils && allOils.length > itemPerPage">
+                        <div class="pagination-block text-center mt-4 mb-3" *ngIf="allOils && allOils.length > itemPerPage">
                             <pagination-controls (pageChange)="page = $event"></pagination-controls>
                         </div>
                     </div>
+
                 </div>
-            </div>
-        </section>
+            </form>
+        </div>
+
     </div>
 </div>

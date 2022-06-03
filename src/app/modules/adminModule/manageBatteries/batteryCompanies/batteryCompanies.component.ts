@@ -23,7 +23,7 @@ export class batteryCompaniesComponent implements OnInit {
 
   allcompanies;
 
-  itemPerPage = 25;
+  itemPerPage = 100;
   page = 1;
   constructor(
     private route: ActivatedRoute,

@@ -57,7 +57,7 @@ export class addNewVehicleComponent implements OnInit {
 
   allVehicles;
 
-  itemPerPage = 5;
+  itemPerPage = 25;
   page = 1;
   constructor(
     private route: ActivatedRoute,

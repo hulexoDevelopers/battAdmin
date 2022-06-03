@@ -20,6 +20,7 @@ import { editTechnicianTyreStockComponent } from 'src/app/modules/shared/popups/
 
 
 
+
 @Component({
   templateUrl: './technicianDetail.component.html',
   styleUrls: ['./technicianDetail.component.scss'],
@@ -183,6 +184,33 @@ export class technicianDetailComponent implements OnInit {
         this.getParamsId();
       }
     });
+  }
+
+
+  password;
+  confirmPassword;
+  updatePassword() {
+    this.password = this.password.trim();
+    if (!this.password) {
+      return;
+    }
+    if (this.password != this.confirmPassword) {
+      this.alert.actionResponse('Password not match', 'error');
+      return;
+    }
+    let data = {
+      id: this.techId,
+      newPassword: this.password
+    }
+    this.userService.changeTechPassword(data).subscribe(res => {
+      if (!res.success) {
+        this.alert.actionResponse("Password not updated", 'error');
+        return;
+      } else {
+        this.alert.actionResponse("Password is updated", 'success');
+
+      }
+    })
   }
 
 }

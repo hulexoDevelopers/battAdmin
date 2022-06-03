@@ -26,7 +26,7 @@ export class vehicleBrandsComponent implements OnInit {
 
   allBrands;
 
-  itemPerPage = 10;
+  itemPerPage = 100;
   page = 1;
   constructor(
     private route: ActivatedRoute,

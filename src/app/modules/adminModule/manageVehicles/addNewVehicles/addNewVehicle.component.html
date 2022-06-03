@@ -15,8 +15,7 @@
                 <div class="page-title-actions">
 
                     <div class="d-inline-block ">
-                        <button type="button" (click)="data.goBack()" aria-haspopup="true" aria-expanded="false"
-                            class="btn-shadow  btn btn-info">
+                        <button type="button" (click)="data.goBack()" aria-haspopup="true" aria-expanded="false" class="btn-shadow  btn btn-info">
                             <span class="btn-icon-wrapper">
                                 <i class="pe-7s-angle-left fa-1x  fa-w-20"></i>
                             </span>
@@ -29,54 +28,37 @@
         </div>
         <div class="add-brands card">
             <div class="row">
-                <div class="col pt-3">
+                <div class="col pt-3 mt-4">
                     <h2 class="card-title">Add New Vehicle Model</h2>
                 </div>
             </div>
 
             <form name="form" (ngSubmit)="f.form.valid && saveNewVehicle()" #f="ngForm" novalidate>
                 <div class="row mt-3">
-
-
-                    <div class="col-7">
-
-
+                    <div class="col-lg-7 col-sm-12">
                         <div class="row">
-                            <div class="col-lg-12">
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <div class="position-relative form-group"><label for="exampleSelect"
-                                                class="">Vehicle Brand</label>
-                                            <ngx-select-dropdown [(ngModel)]="brand" name="brand" [multiple]="false"
-                                                (change)="brandChange($event)" [config]="brandConfig"
-                                                [options]="allBrands" #type="ngModel"
-                                                [ngClass]="{ 'is-invalid': f.submitted && type.invalid }" required>
-                                            </ngx-select-dropdown>
+                            <div class="col-lg-7">
+                                <div class="position-relative form-group"><label for="exampleSelect" class="">Vehicle Brand</label>
+                                    <ngx-select-dropdown [(ngModel)]="brand" name="brand" [multiple]="false" (change)="brandChange($event)" [config]="brandConfig" [options]="allBrands" #type="ngModel" [ngClass]="{ 'is-invalid': f.submitted && type.invalid }" required>
+                                    </ngx-select-dropdown>
 
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 plus-icon">
-                                        <!-- <button class="btn btn-primary"><i class="fas fa-plus fa-1x"></i></button> -->
-                                        <button type="button" class="btn mr-2 mb-2 btn-primary" (click)="addNewBrand()">
-                                            <i class="fas fa-plus fa-1x"></i> Add New Brand
-                                        </button>
-
-
-                                    </div>
                                 </div>
+                            </div>
+                            <div class="col-lg-5 plus-icon">
+                                <!-- <button class="btn btn-primary"><i class="fas fa-plus fa-1x"></i></button> -->
+                                <button type="button" class="btn mb-2 btn-primary btn-block" (click)="addNewBrand()">
+                                    <i class="fas fa-plus fa-1x"></i> Add New Brand
+                                </button>
+
 
                             </div>
-
-
                         </div>
 
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="position-relative form-group"><label for="exampleEmail" class="">
-                                        Vehicle Model</label>
-                                    <input name="model" type="text" [(ngModel)]="vehicle.title" id="exampleEmail"
-                                        placeholder="Enter model" class="form-control" #vTitle="ngModel"
-                                        [ngClass]="{ 'is-invalid': f.submitted && vTitle.invalid }" required>
+                                <div class="position-relative form-group">
+                                    <label for="exampleEmail" class="">Vehicle Model</label>
+                                    <input name="model" type="text" [(ngModel)]="vehicle.title" id="exampleEmail" placeholder="Enter model" class="form-control" #vTitle="ngModel" [ngClass]="{ 'is-invalid': f.submitted && vTitle.invalid }" required>
                                     <div *ngIf="f.submitted && vTitle.invalid" class="invalid-feedback">
                                         <div *ngIf="vTitle.errors.required">Please enter title
                                         </div>
@@ -84,34 +66,23 @@
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <div class="position-relative form-group"><label for="exampleSelect"
-                                        class="">Recommended Batteries</label>
-                                    <ngx-select-dropdown [(ngModel)]="batteries" name="btry" [multiple]="true"
-                                        (change)="batteryChange($event)" [config]="brandConfig" [options]="allBatteries"
-                                        #btry="ngModel">
+                                <div class="position-relative form-group"><label for="exampleSelect" class="">Recommended Batteries</label>
+                                    <ngx-select-dropdown [(ngModel)]="batteries" name="btry" [multiple]="true" (change)="batteryChange($event)" [config]="brandConfig" [options]="allBatteries" #btry="ngModel">
                                     </ngx-select-dropdown>
-
                                 </div>
-
                             </div>
 
                             <div class="col-lg-12">
-                                <div class="position-relative form-group"><label for="exampleSelect"
-                                        class="">Recommended Oils</label>
-                                    <ngx-select-dropdown [(ngModel)]="oiles" name="oils" [multiple]="true"
-                                        (change)="oilChange($event)" [config]="brandConfig" [options]="allOils"
-                                        #oil="ngModel">
+                                <div class="position-relative form-group"><label for="exampleSelect" class="">Recommended Oils</label>
+                                    <ngx-select-dropdown [(ngModel)]="oiles" name="oils" [multiple]="true" (change)="oilChange($event)" [config]="brandConfig" [options]="allOils" #oil="ngModel">
                                     </ngx-select-dropdown>
 
                                 </div>
 
                             </div>
                             <div class="col-lg-12">
-                                <div class="position-relative form-group"><label for="exampleSelect"
-                                        class="">Recommended Tyres</label>
-                                    <ngx-select-dropdown [(ngModel)]="tyres" name="tyres" [multiple]="true"
-                                        (change)="tyreChange($event)" [config]="brandConfig" [options]="allTyres"
-                                        #tyre="ngModel">
+                                <div class="position-relative form-group"><label for="exampleSelect" class="">Recommended Tyres</label>
+                                    <ngx-select-dropdown [(ngModel)]="tyres" name="tyres" [multiple]="true" (change)="tyreChange($event)" [config]="brandConfig" [options]="allTyres" #tyre="ngModel">
                                     </ngx-select-dropdown>
 
                                 </div>
@@ -122,28 +93,16 @@
                         <div class="row mt-3">
                             <div class="col">
                                 <div class="text-right form-group">
-
-                                    <button id="cancelBtn" type="reset"
-                                        class="btn btn-outline-secondary mr-2">Cancel</button>
-
-
-
+                                    <button id="cancelBtn" type="reset" class="btn btn-outline-secondary mr-2">Cancel</button>
                                     <button type="submit" class="btn btn-primary">Save</button>
-
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
-                    <div class="col-auto">
-                        <div class="vl"></div>
-                    </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <h5>Upload Vehicle Model Image</h5>
                         <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                            <input id="upload" type="file" #myInput (change)="onImagePicked($event)"
-                                class="form-control border-0">
+                            <input id="upload" type="file" #myInput (change)="onImagePicked($event)" class="form-control border-0">
                             <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose
                                 file</label>
                             <div class="input-group-append">
@@ -158,51 +117,42 @@
                             <h6>Invalid Image</h6>
                         </div>
                         <!-- Uploaded image area-->
-                        <p class="font-italic text-center">The image uploaded will be rendered inside the box below.
+                        <p class="font-italic text-left">The image uploaded will be rendered inside the box below.
                         </p>
                         <div class="image-area mt-4">
-                            <img *ngIf="!image" id="imageResult" src="#" alt=""
-                                class="img-fluid rounded shadow-sm mx-auto d-block">
+                            <img *ngIf="!image" id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
 
-                            <img *ngIf="image" id="imageResult" [src]="imagePreview" alt=""
-                                class="img-fluid rounded shadow-sm mx-auto d-block" #myInput>
+                            <img *ngIf="image" id="imageResult" [src]="imagePreview" alt="" class="img-fluid rounded shadow-sm mx-auto d-block" #myInput>
                             <!-- <img *ngIf="!image" class="img-thumbnail rounded"
-                                    src="assets/images/brand-placeholder.png" alt=""> -->
+                                                        src="assets/images/brand-placeholder.png" alt=""> -->
                             <!-- <img *ngIf="image" class="img-thumbnail rounded" [src]="imagePreview" alt=""> -->
                         </div>
 
                     </div>
-
-
-
-
-
                 </div>
+
+
             </form>
         </div>
-
-
-        <div class="row card mt-5">
-            <div class="col-lg-12">
-                <div class="card-body">
-                    <h3 class="card-title">Vehicles List</h3>
-                    <table class="mb-0 table table-striped">
+        <div class="row pt-5">
+            <div class="col-lg-12 col-sm-12">
+                <h3 class="card-title">Vehicles List</h3>
+                <div class="table-responsive">
+                    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                         <thead>
                             <tr>
                                 <th>#</th>
-
                                 <th>Vehicle Company</th>
                                 <th>Vehicle Model</th>
                                 <th>Vehicle Image</th>
-                                <th>Recommended Batteries</th>
-                                <th>Recommended Oils</th>
-                                <th>Recommended Tyres</th>
-                                <th>Action</th>
+                                <th>Recom. Batteries</th>
+                                <th>Recom. Oils</th>
+                                <th>Recom. Tyres</th>
+                                <th class="text-right">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr
-                                *ngFor="let car of allVehicles  | paginate: { itemsPerPage: itemPerPage, currentPage: page } ; let i=index">
+                            <tr *ngFor="let car of allVehicles  | paginate: { itemsPerPage: itemPerPage, currentPage: page } ; let i=index">
                                 <th scope="row"> <span *ngIf="page==1">{{(i+1)}}</span>
                                     <span *ngIf="page>1">{{((page-1)*itemPerPage)+(i+1)}}</span>
                                 </th>
@@ -210,19 +160,17 @@
                                 <td><a *ngIf="car.brandId">{{findBrandName(car.brandId)}}</a> </td>
                                 <td>{{car.title}}</td>
                                 <td>
-                                    <img *ngIf="car.imageUrl == '--'" width="40" class="rounded-circle"
-                                        src="assets/images/avatars/battery logo.png" alt="">
-                                    <img *ngIf="car.imageUrl != ''" width="40" class="rounded-circle"
-                                        [src]="car.imageUrl" alt="">
+                                    <img *ngIf="car.imageUrl == '--'" width="40" class="img-fluid" src="assets/images/avatars/battery logo.png" alt="">
+                                    <img *ngIf="car.imageUrl != ''" width="40" class="img-fluid" [src]="car.imageUrl" alt="">
                                 </td>
                                 <td>
                                     <div *ngIf="car.batteries.length > 0">
                                         <span *ngFor="let btry of car.batteries">
-                                            <a [routerLink]="['/dashboard/battery/detail', btry]"
-                                                routerLinkActive="router-link-active"
-                                                *ngIf="findBatteryName(btry) != '--'"> {{findBatteryName(btry)}} </a>
-                                            <i *ngIf="findBatteryName(btry) === '--'"> {{findBatteryName(btry)}} </i>
-                                        </span>
+                                    <a [routerLink]="['/dashboard/battery/detail', btry]"
+                                        routerLinkActive="router-link-active" *ngIf="findBatteryName(btry) != '--'">
+                                        {{findBatteryName(btry)}} </a>
+                                    <i *ngIf="findBatteryName(btry) === '--'"> {{findBatteryName(btry)}} </i>
+                                </span>
                                     </div>
                                     <div *ngIf="car.batteries.length == 0">
                                         <span>Not Assigned </span>
@@ -233,11 +181,11 @@
                                 <td>
                                     <div *ngIf="car.oils.length > 0">
                                         <span *ngFor="let item of car.oils">
-                                            <a [routerLink]="['/dashboard/oils/detail', item]"
-                                                routerLinkActive="router-link-active" *ngIf="findOilName(item) != '--'">
-                                                {{findOilName(item)}} </a>
-                                            <i *ngIf="findOilName(item) === '--'"> {{findOilName(item)}} </i>
-                                        </span>
+                                    <a [routerLink]="['/dashboard/oils/detail', item]" routerLinkActive="router-link-active"
+                                        *ngIf="findOilName(item) != '--'">
+                                        {{findOilName(item)}} </a>
+                                    <i *ngIf="findOilName(item) === '--'"> {{findOilName(item)}} </i>
+                                </span>
                                     </div>
                                     <div *ngIf="car.oils.length == 0">
                                         <span>Not Assigned </span>
@@ -248,11 +196,11 @@
                                 <td>
                                     <div *ngIf="car.tyres.length > 0">
                                         <span *ngFor="let item of car.tyres">
-                                            <a [routerLink]="['/dashboard/tyres/detail', item]"
-                                                routerLinkActive="router-link-active" *ngIf="findTyreName(item) != '--'">
-                                                {{findTyreName(item)}} </a>
-                                            <i *ngIf="findTyreName(item) === '--'"> {{findTyreName(item)}} </i>
-                                        </span>
+                                    <a [routerLink]="['/dashboard/tyres/detail', item]"
+                                        routerLinkActive="router-link-active" *ngIf="findTyreName(item) != '--'">
+                                        {{findTyreName(item)}} </a>
+                                    <i *ngIf="findTyreName(item) === '--'"> {{findTyreName(item)}} </i>
+                                </span>
                                     </div>
                                     <div *ngIf="car.tyres.length == 0">
                                         <span>Not Assigned </span>
@@ -260,25 +208,25 @@
 
                                 </td>
                                 <td>
+                                    <div class="btnblock pull-right">
+                                        <button type="button" (click)="editVehicle(car._id)" title="Edit model" class="btn btn-circle btn-default btn-sm"><span class="sr-only">Edit</span><i
+                                        class="fa fa-pencil-alt"></i></button>
 
-                                    <button type="button" (click)="editVehicle(car._id)" title="Edit model"
-                                        class="btn btn-circle btn-default btn-sm"><span class="sr-only">Edit</span><i
-                                            class="fa fa-pencil-alt"></i></button>
-
-                                    <button type="button" title="Delete" (click)="deleteVehicle(car._id)"
-                                        class="btn btn-circle btn-default btn-sm"><span class="sr-only">Delete</span><i
-                                            class="fa fa-trash"></i></button>
+                                        <button type="button" title="Delete" (click)="deleteVehicle(car._id)" class="btn btn-circle btn-default btn-sm"><span class="sr-only">Delete</span><i
+                                        class="fa fa-trash"></i></button>
+                                    </div>
 
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <div class="pagination-block text-right mt-2"
-                        *ngIf="allVehicles && allVehicles.length > itemPerPage">
-                        <pagination-controls (pageChange)="page = $event"></pagination-controls>
-                    </div>
+                </div>
+                <div class="pagination-block text-center mt-5 mb-3" *ngIf="allVehicles && allVehicles.length > itemPerPage">
+                    <pagination-controls (pageChange)="page = $event"></pagination-controls>
                 </div>
             </div>
         </div>
+
+
     </div>
 </div>

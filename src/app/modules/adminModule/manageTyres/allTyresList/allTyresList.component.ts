@@ -17,7 +17,7 @@ import { editTyreComponent } from 'src/app/modules/shared/popups/tyreModule/edit
 
 export class allTyresListComponent implements OnInit {
 
-  itemPerPage = 5;
+  itemPerPage = 100;
   page = 1;
   allTyres
 

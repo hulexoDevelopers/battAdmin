@@ -22,18 +22,19 @@
             </div>
         </div>
         <div class="add-brands card">
-            <div class="row">
-                <div class="col pt-3">
-                    <h2 class="card-title">Add New Battery</h2>
-                </div>
-            </div>
+
             <form name="form" (ngSubmit)="f.form.valid && saveNewBattery()" #f="ngForm" novalidate>
                 <div class="row mt-3">
-                    <div class="col-7">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col pt-3">
+                                <h2 class="card-title">Add New Battery</h2>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="row">
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-7">
                                         <div class="position-relative form-group"><label for="exampleSelect" class="">Battery Brand</label>
                                             <ngx-select-dropdown [(ngModel)]="brand" name="companyName" [multiple]="false" (change)="brandChange($event)" [config]="brandConfig" [options]="allBrands" #companyId="ngModel" [ngClass]="{'is-invalid': f.submitted && companyId.invalid }" required>
                                             </ngx-select-dropdown>
@@ -42,8 +43,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 plus-icon">
-                                        <button type="button" class="btn mr-2 mb-2 btn-primary" (click)="addNewcompany()">
+                                    <div class="col-lg-5 plus-icon">
+                                        <button type="button" class="btn mb-2 btn-block btn-primary" (click)="addNewcompany()">
                                             <i class="fas fa-plus fa-1x"></i> Add New Brand
                                         </button>
                                     </div>
@@ -51,17 +52,17 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-7">
+                            <div class="col-lg-12">
                                 <div class="position-relative form-group">
                                     <label for="exampleEmail" class=""> Battery Model</label>
-                                    <input name="model" type="text" [(ngModel)]="battery.title" id="exampleEmail" placeholder="title" class="form-control" #bTitle="ngModel" [ngClass]="{ 'is-invalid': f.submitted && bTitle.invalid }" required>
+                                    <input name="model" type="text" [(ngModel)]="battery.title" id="exampleEmail" placeholder="Title" class="form-control" #bTitle="ngModel" [ngClass]="{ 'is-invalid': f.submitted && bTitle.invalid }" required>
                                     <div *ngIf="f.submitted && bTitle.invalid" class="invalid-feedback">
                                         <div *ngIf="bTitle.errors.required">Please enter title
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-5">
+                            <div class="col-lg-4 col-sm-12">
                                 <div class="position-relative form-group"><label for="exampleEmail" class="">Price
                                         (AED)</label><input name="price" type="number" id="exampleEmail" [(ngModel)]="battery.price" placeholder="000" class="form-control" #bPrice="ngModel" [ngClass]="{ 'is-invalid': f.submitted && bPrice.invalid }" required>
                                     <div *ngIf="f.submitted && bPrice.invalid" class="invalid-feedback">
@@ -70,8 +71,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="position-relative form-group"><label for="exampleEmail" class="">Quantity</label><input name="quantity" type="number" [(ngModel)]="battery.quantity" #bQuantity="ngModel" id="exampleEmail" placeholder="quantity" [ngClass]="{ 'is-invalid': f.submitted && bQuantity.invalid }"
+                            <div class="col-lg-4 col-sm-12">
+                                <div class="position-relative form-group"><label for="exampleEmail" class="">Quantity</label><input name="quantity" type="number" [(ngModel)]="battery.quantity" #bQuantity="ngModel" id="exampleEmail" placeholder="Quantity" [ngClass]="{ 'is-invalid': f.submitted && bQuantity.invalid }"
                                         required class="form-control">
                                     <div *ngIf="f.submitted && bQuantity.invalid" class="invalid-feedback">
                                         <div *ngIf="bQuantity.errors.required">Please enter quantity
@@ -79,7 +80,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4 col-sm-12">
                                 <div class="position-relative form-group"><label for="exampleEmail" class="">Warranty</label><input name="warranty" type="text" [(ngModel)]="battery.warranty" #bWarranty="ngModel" id="exampleEmail" placeholder="Warranty" [ngClass]="{ 'is-invalid': f.submitted && bWarranty.invalid }"
                                         required class="form-control">
                                     <div *ngIf="f.submitted && bWarranty.invalid" class="invalid-feedback">
@@ -99,6 +100,40 @@
                             </div>
                         </div>
 
+
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <h5>Upload Battery Image</h5>
+                                <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                                    <input id="upload" type="file" #myInput (change)="onImagePicked($event)" class="form-control border-0">
+                                    <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose
+                file</label>
+                                    <div class="input-group-append">
+                                        <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i
+                        class="fa fa-cloud-upload mr-2 text-muted"></i><small
+                        class="text-uppercase font-weight-bold text-muted">Choose
+                        file</small></label>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="inValidImage ||  invalidType" class="small text-danger">
+                                    <h6>Invalid Image</h6>
+                                </div>
+                                <!-- Uploaded image area-->
+                                <p class="font-italic text-left">The image uploaded will be rendered inside the box below.
+                                </p>
+                                <div class="image-area mt-4">
+                                    <img *ngIf="!image" id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+
+                                    <img *ngIf="image" id="imageResult" [src]="imagePreview" alt="" class="img-fluid rounded shadow-sm mx-auto d-block" #myInput>
+                                    <!-- <img *ngIf="!image" class="img-thumbnail rounded"
+                                        src="assets/images/brand-placeholder.png" alt=""> -->
+                                    <!-- <img *ngIf="image" class="img-thumbnail rounded" [src]="imagePreview" alt=""> -->
+                                </div>
+
+
+                            </div>
+                        </div>
                         <div class="row mt-3">
                             <div class="col">
                                 <div class="text-right form-group">
@@ -108,41 +143,64 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
 
-                    <div class="col-auto">
-                        <div class="vl"></div>
-                    </div>
-                    <div class="col-lg-4">
-                        <h5>Upload Battery Model Image</h5>
-                        <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                            <input id="upload" type="file" #myInput (change)="onImagePicked($event)" class="form-control border-0">
-                            <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose
-                                file</label>
-                            <div class="input-group-append">
-                                <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i
-                                        class="fa fa-cloud-upload mr-2 text-muted"></i><small
-                                        class="text-uppercase font-weight-bold text-muted">Choose
-                                        file</small></label>
-                            </div>
+
+                    <div class="col-md-6">
+
+                        <h3 class="card-title pt-3">Battery List</h3>
+
+                        <div class="table-responsive">
+                            <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+
+                                        <th>Company</th>
+                                        <th>Model </th>
+                                        <th>Warranty</th>
+                                        <th>Image</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let btry of allBatteries  | paginate: { itemsPerPage: itemPerPage, currentPage: page } ; let i=index">
+                                        <th scope="row"> <span *ngIf="page==1">{{(i+1)}}</span>
+                                            <span *ngIf="page>1">{{((page-1)*itemPerPage)+(i+1)}}</span>
+                                        </th>
+                                        <td>{{getCompanyTitle(btry.companyId)}}</td>
+                                        <td><a [routerLink]="['/dashboard/battery/detail', btry._id]" routerLinkActive="router-link-active">{{btry.title}}</a> </td>
+
+                                        <td>+</td>
+                                        <td>
+                                            <img *ngIf="btry.imageUrl == '--'" width="40" class="img-fluid" src="assets/images/avatars/battery logo.png" alt="">
+                                            <img *ngIf="btry.imageUrl != ''" width="40" class="img-fluid" [src]="btry.imageUrl" alt="">
+                                        </td>
+
+
+                                        <td>
+                                            <div class="btnblock">
+
+                                                <button type="button" (click)="editBattery(btry._id)" title="Edit battery" class="btn btn-circle btn-default btn-sm"><span class="sr-only">Edit</span><i
+                                        class="fa fa-pencil-alt"></i></button>
+
+                                                <button type="button" title="Delete" (click)="deleteBattery(btry._id)" class="btn btn-circle btn-default btn-sm"><span class="sr-only">Delete</span><i
+                                        class="fa fa-trash"></i></button>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pagination-block text-center mt-4 mb-5" *ngIf="allBatteries && allBatteries.length > itemPerPage">
+                            <pagination-controls (pageChange)="page = $event"></pagination-controls>
                         </div>
 
-                        <div *ngIf="inValidImage ||  invalidType" class="small text-danger">
-                            <h6>Invalid Image</h6>
-                        </div>
-                        <!-- Uploaded image area-->
-                        <p class="font-italic text-center">The image uploaded will be rendered inside the box below.
-                        </p>
-                        <div class="image-area mt-4">
-                            <img *ngIf="!image" id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
 
-                            <img *ngIf="image" id="imageResult" [src]="imagePreview" alt="" class="img-fluid rounded shadow-sm mx-auto d-block" #myInput>
-                            <!-- <img *ngIf="!image" class="img-thumbnail rounded"
-                                    src="assets/images/brand-placeholder.png" alt=""> -->
-                            <!-- <img *ngIf="image" class="img-thumbnail rounded" [src]="imagePreview" alt=""> -->
-                        </div>
 
                     </div>
 
@@ -153,59 +211,6 @@
             </form>
         </div>
 
-        <section class="card mt-5">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card-body">
-                        <h3 class="card-title">Battery List</h3>
-                        <table class="mb-0 table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Model </th>
-                                    <th>Company</th>
-                                    <th>Warranty</th>
-                                    <th>Logo</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let btry of allBatteries  | paginate: { itemsPerPage: itemPerPage, currentPage: page } ; let i=index">
-                                    <th scope="row"> <span *ngIf="page==1">{{(i+1)}}</span>
-                                        <span *ngIf="page>1">{{((page-1)*itemPerPage)+(i+1)}}</span>
-                                    </th>
 
-                                    <td><a [routerLink]="['/dashboard/battery/detail', btry._id]" routerLinkActive="router-link-active">{{btry.title}}</a> </td>
-                                    <td>{{getCompanyTitle(btry.companyId)}}</td>
-                                    <td>+</td>
-                                    <td>
-                                        <img *ngIf="btry.imageUrl == '--'" width="40" class="rounded-circle" src="assets/images/avatars/battery logo.png" alt="">
-                                        <img *ngIf="btry.imageUrl != ''" width="40" class="rounded-circle" [src]="btry.imageUrl" alt="">
-                                    </td>
-
-
-                                    <td>
-
-
-                                        <button type="button" (click)="editBattery(btry._id)" title="Edit battery" class="btn btn-circle btn-default btn-sm"><span
-                                                class="sr-only">Edit</span><i class="fa fa-pencil-alt"></i></button>
-
-                                        <button type="button" title="Delete" (click)="deleteBattery(btry._id)" class="btn btn-circle btn-default btn-sm"><span
-                                                class="sr-only">Delete</span><i class="fa fa-trash"></i></button>
-                                    </td>
-
-                                </tr>
-
-
-
-                            </tbody>
-                        </table>
-                        <div class="pagination-block text-right" *ngIf="allBatteries && allBatteries.length > itemPerPage">
-                            <pagination-controls (pageChange)="page = $event"></pagination-controls>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </div>
 </div>

@@ -38,7 +38,7 @@ export class allBatteriesListComponent implements OnInit {
   editImage: boolean = false;
   disabled: boolean = false;
 
-  itemPerPage = 25;
+  itemPerPage = 100;
   page = 1;
 
   isLoad: boolean = false;

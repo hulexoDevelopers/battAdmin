@@ -10,7 +10,7 @@ import { alert } from './modules/shared/services/sweetAlert.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Wajabat Dashboard';
+  title = 'Battmobile Dashboard';
 
   isMain: boolean = false;
   routeload: boolean = false;
@@ -47,6 +47,9 @@ export class AppComponent implements OnInit {
       role: this.UserInfoService.getUserRole()
     }
     this.SocService.emit('addUser', data);
+    this.SocService.on('getUsers').subscribe(res =>{
+        console.log('users =>' + JSON.stringify(res))
+    })
 
 
     this.SocService.on('updateActiveJobs').subscribe(res => {

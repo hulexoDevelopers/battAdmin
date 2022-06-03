@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "battmobileApp": {
+    "wajabatApp": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/battmobileApp",
+            "outputPath": "dist/wajabatApp",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -37,7 +37,9 @@
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
-              "./src/assets/js/main.js"
+              "./src/assets/js/main.js",
+              "./node_modules/apexcharts/dist/apexcharts.min.js",
+              "./node_modules/pusher-js/dist/web/pusher.min.js"
             ]
           },
           "configurations": {
@@ -73,18 +75,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "battmobileApp:build"
+            "browserTarget": "wajabatApp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "battmobileApp:build:production"
+              "browserTarget": "wajabatApp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "battmobileApp:build"
+            "browserTarget": "wajabatApp:build"
           }
         },
         "test": {
@@ -104,7 +106,9 @@
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
-              "./src/assets/js/main.js"
+              "./src/assets/js/main.js",
+              "./node_modules/apexcharts/dist/apexcharts.min.js",
+              "./node_modules/pusher-js/dist/web/pusher.min.js"
             ]
           }
         },
@@ -125,16 +129,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "battmobileApp:serve"
+            "devServerTarget": "wajabatApp:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "battmobileApp:serve:production"
+              "devServerTarget": "wajabatApp:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "battmobileApp"
+  "defaultProject": "wajabatApp"
 }
