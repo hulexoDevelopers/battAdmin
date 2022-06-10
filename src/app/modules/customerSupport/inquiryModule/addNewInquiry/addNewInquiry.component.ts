@@ -153,6 +153,7 @@ export class addNewInquiryComponent implements OnInit {
   getAllBrandsList() {
     this.brandService.getAllBrandsList().subscribe(res => {
       this.vBrands = res.data;
+      this.vBrands.sort((a, b) => a.title.localeCompare(b.title));
       this.getAllVehicleList();
     })
   }
@@ -162,6 +163,7 @@ export class addNewInquiryComponent implements OnInit {
   getAllVehicleList() {
     this.vehicleService.getAllVehicleList().subscribe(res => {
       this.allVehicles = res.data;
+      this.allVehicles.sort((a, b) => a.title.localeCompare(b.title));
       this.isVehicles = true;
     })
   }
@@ -170,6 +172,7 @@ export class addNewInquiryComponent implements OnInit {
   getAllBatteriesList() {
     this.batteryService.getAllBatteriesList().subscribe(res => {
       this.allBatteriesList = res.data;
+      this.allBatteriesList.sort((a, b) => a.title.localeCompare(b.title));
     })
   }
 
@@ -177,6 +180,7 @@ export class addNewInquiryComponent implements OnInit {
   getAllTyresList() {
     this.tyreService.getAllTyresList().subscribe(res => {
       this.allTyresList = res.data;
+      this.allTyresList.sort((a, b) => a.title.localeCompare(b.title));
     })
   }
 
@@ -184,6 +188,7 @@ export class addNewInquiryComponent implements OnInit {
   getAllOilsList() {
     this.oilService.getAllOilsList().subscribe(res => {
       this.allOilsList = res.data;
+      this.allOilsList.sort((a, b) => a.title.localeCompare(b.title));
     })
   }
 

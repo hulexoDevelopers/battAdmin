@@ -65,6 +65,7 @@ export class washVehiclesComponent implements OnInit {
   getAllBrands() {
     this.brandService.getAllBrandsList().subscribe(res => {
       this.allCarBrands = res.data;
+      this.allCarBrands.sort((a, b) => a.title.localeCompare(b.title));
     })
   }
 
@@ -72,11 +73,13 @@ export class washVehiclesComponent implements OnInit {
   getAllVehiclesList() {
     this.vehicleService.getAllVehicleList().subscribe(res => {
       this.allVehicles = res.data;
+      this.allVehicles.sort((a, b) => a.title.localeCompare(b.title));
     })
   }
 
   getBrandVehicles(brandId: string) {
     this.brandVehicles = this.allVehicles.filter(data => data.brandId == brandId);
+    this.brandVehicles.sort((a, b) => a.title.localeCompare(b.title));
   }
 
   sVehicle;
